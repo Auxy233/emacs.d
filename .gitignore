@@ -1,0 +1,12 @@
+# First, ignore everything
+*
+# Now, whitelist anything that's a directory
+!core/
+!lang/
+# And all the file types you're interested in.
+!*.el
+!README.org
+!.gitignore
+!LICENSE
+# And again XD
+custom.el
