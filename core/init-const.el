@@ -23,6 +23,26 @@
   :group 'sevil-setting
   :type '(boolean))
 
+(defcustom sevil-use-which-key nil
+  "Show key hints."
+  :group 'sevil-setting
+  :type '(boolean))
+
+(defcustom sevil-language-list
+  '(clisp
+    coq
+    cpp
+    haskell
+    idris
+    latex
+    ocaml
+    python
+    racket
+    rust)
+  "The list of languages tocustom-file."
+  :group 'sevil-setting
+  :type '(list symbol))
+
 ;; helper constants
 (defconst sys/linuxp
   (eq system-type 'gnu/linux)
@@ -56,6 +76,14 @@
   (>= emacs-major-version 27)
   "Emacs is 27 or above.")
 
+(defmacro sevil-load-lang (lang)
+  "Load a LANG when it's in language list."
+  (when (member lang sevil-language-list)
+    (let ((lang-file
+           (intern
+            (concat "init-" (symbol-name lang)))))
+      `(require ',lang-file))))
+
 ;; check if a font exits
 (defun font-installed-p (font-name)
   "Check if font with FONT-NAME is available."
@@ -77,6 +105,17 @@
 (defun sevil/font-info ()
   "Get the current font name with size."
   (concat sevil-font-name " " sevil-font-size))
+
+;; load custom file
+(setq custom-file
+      (expand-file-name "custom.el" user-emacs-directory))
+
+(unless (file-exists-p custom-file)
+  (copy-file
+   (expand-file-name "sample-custom.el" user-emacs-directory)
+   custom-file))
+
+(load-file custom-file)
 
 (provide 'init-const)
 ;;; init-const.el ends here

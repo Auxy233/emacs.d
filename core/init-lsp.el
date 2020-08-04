@@ -79,7 +79,11 @@
   (lsp-log-io nil)
   (lsp-enable-indentation nil)
   (lsp-enable-links nil)
-  (lsp-prefer-capf t))
+  (lsp-prefer-capf t)
+  :init
+  (when sevil-use-which-key
+    (with-eval-after-load 'lsp-mode
+      (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration))))
 
 (use-package lsp-ui
   :commands (lsp-ui-mode lsp-ui-peek-find-definistions lsp-ui-peek-find-references)

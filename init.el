@@ -11,7 +11,7 @@
   (error "This Emacs is too old to support"))
 
 ;; comment out for debugging
-(setq debug-on-error t)
+(setq debug-on-error nil)
 
 ;; initialize straight
 (defvar bootstrap-version)
@@ -87,14 +87,14 @@
 (require 'init-util)
 
 ;;; programming languages environment
-(require 'init-cpp)
-(require 'init-python)
-(require 'init-coq)
-(require 'init-ocaml)
-(require 'init-racket)
-(require 'init-clisp)
-(require 'init-idris)
-(require 'init-rust)
-(require 'init-haskell)
-(require 'init-latex)
+(sevil-load-lang cpp)
+(sevil-load-lang python)
+(sevil-load-lang coq)
+(sevil-load-lang ocaml)
+(sevil-load-lang racket)
+(sevil-load-lang clisp)
+(sevil-load-lang idris)
+(sevil-load-lang rust)
+(sevil-load-lang haskell)
+(sevil-load-lang latex)
 ;;; init.el ends here

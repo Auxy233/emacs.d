@@ -48,10 +48,12 @@
     "TAB" 'next-buffer
 
     ;; applications
+    "a" '(:ignore t :which-key "apps")
     "ac" 'calendar
     "ai" 'erc
 
     ;; buffers
+    "b" '(:ignore t :which-key "buffer")
     "bb" 'ivy-switch-buffer
     "bi" 'ibuffer
     "bk" 'kill-this-buffer
@@ -60,6 +62,7 @@
     "br" 'revert-buffer
 
     ;; flycheck
+    "C" '(:ignore t :which-key "check")
     "Cc" 'flycheck-buffer
     "CC" 'flycheck-clear
     "Cx" 'flycheck-compile
@@ -78,6 +81,7 @@
     "Cd" 'flycheck-disable-checker
 
     ;; counsel
+    "c" '(:ignore t :which-key "counsel")
     "cB" 'counsel-bookmarked-directory
     "cF" 'counsel-faces
     "cL" 'counsel-load-library
@@ -103,6 +107,7 @@
     "cz" 'counsel-fzf
 
     ;; files
+    "f" '(:ignore t :which-key "files")
     "fF" 'find-file-other-window
     "fJ" 'dired-jump-other-window
     "fd" 'delete-file
@@ -112,7 +117,8 @@
     "fr" 'rename-file
     "ft" 'treemacs
 
-    ;; gits
+    ;; git
+    "g" '(:ignore t :which-key "git")
     "gB" 'magit-blame-addition
     "gC" 'magit-commit-create
     "gD" 'magit-dispatch
@@ -127,17 +133,19 @@
     "gr" 'magit-rebase-interactive
 
     ;; hl-todo
+    "h" '(:ignore t :which-key "hltodo")
     "hb" 'hl-todo-previous
     "hf" 'hl-todo-next
     "ho" 'hl-todo-occur
     "hi" 'hl-todo-insert
 
     ;; projectile
-    "p" 'projectile-command-map
+    "p" '(:keymap projectile-command-map :which-key "projectile")
 
     "r" 'recentf-open-files
 
     ;; symbol overlays
+    "s" '(:ignore t :which-key "symbol")
     "sp" 'symbol-overlay-put
     "sf" 'symbol-overlay-jump-next
     "sb" 'symbol-overlay-jump-prev
@@ -146,6 +154,7 @@
     "sr" 'symbol-overlay-remove-all
 
     ;; misc
+    "x" '(:ignore t :which-key "misc")
     "xa" 'swiper-all
     "xh" 'shell-pop
     "xi" 'imenu
@@ -155,7 +164,7 @@
     "xs" 'swiper
 
     ;; windows
-    "w" 'evil-window-map
+    "w" '(:keymap evil-window-map :which-key "window")
     "w-" 'split-window-vertically
     "w/" 'split-window-horizontally
     "wr" 'winner-redo
@@ -183,7 +192,7 @@
   :hook (evil-mode . evil-collection-init)
   :custom
   (evil-collection-company-setup t)
-  (evil-collection-calendar-want-org-bindings t)
+  (evil-collection-calendar-want-org-bindings nil)
   (evil-collection-outline-bind-tab-p t)
   (evil-collection-setup-minibuffer t)
   (evil-collection-setup-debugger-keys t)
@@ -191,6 +200,14 @@
 
 (use-package evil-surround
   :hook (evil-mode . global-evil-surround-mode))
+
+;; Tips for next keystroke
+(when sevil-use-which-key
+  (use-package which-key
+    :hook (after-init . which-key-mode)
+    :custom
+    (which-key-idle-delay 0.5)
+    (which-key-add-column-padding 1)))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here

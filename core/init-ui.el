@@ -102,8 +102,8 @@
 
 ;; a minimum modeline, doom-modeline is too heavy
 (use-package mini-modeline
-    :config
-    (mini-modeline-mode t))
+  :config
+  (mini-modeline-mode t))
 
 ;; display dividers between windows
 (setq window-divider-default-places t
