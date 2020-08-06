@@ -5,6 +5,8 @@
 
 ** Structure
 
+   Group by folders and files:
+
    + =core=: core utility essential to editor
      + =boot=: Emacs internal setting
      + =const=: constants and helper functions
@@ -23,22 +25,44 @@
    + =lang=: programming language settings
      + ...
 
+   Some notable plugins:
+
+   + /straight/: a package manager which downloads from git directly; compare to
+     /package.el/, I don't want to spend time on push plugins to Melpa
+   + /use-package/: a macro allows us to write config elegantly
+   + /lsp-mode/: LSP client for Emacs; save your life from different language configurations
+   + /ivy/: a lightweight fuzzy matching
+   + /evil/: use Vim keybindings in Emacs (for detailed key bindings, please
+     visit =core/init-evil.el=)
+   + ...
+
 ** Programming Language
 
    Currently, it supports following programming language with
    dependencies (most through LSP):
 
-   |-------------+------------------|
-   | Language    | Backend          |
-   |-------------+------------------|
-   | C/C++       | clangd           |
-   | OCaml       | ocaml-lsp-server |
-   | Python      | pyls             |
-   | Common Lisp | slime            |
-   | Racket      | Dr.Raclet        |
-   | Idris       | idris            |
-   | Rust        | rust-analyzer    |
-   | Coq         | coq              |
-   | Haskell     | HLS              |
-   | Latex       | latex            |
-   |-------------+------------------|
+   |-------------+------------------+--------------|
+   | Language    | Backend          | Abbreviation |
+   |-------------+------------------+--------------|
+   | C/C++       | clangd           | cpp          |
+   | OCaml       | ocaml-lsp-server | ocaml        |
+   | Python      | pyls             | python       |
+   | Common Lisp | slime            | clisp        |
+   | Racket      | Dr.Raclet        | racket       |
+   | Idris       | idris            | idris        |
+   | Rust        | rust-analyzer    | rust         |
+   | Coq         | coq              | coq          |
+   | Haskell     | HLS              | haskell      |
+   | Latex       | latex            | latex        |
+   |-------------+------------------+--------------|
+
+** Customization
+
+   You can customize the config through =custom.el=, which will be generated
+   after first initialization. We have options:
+   + =sevil-font-name=: The font name you want to use, should be a string
+   + =sevil-font-size=: The size of the font in integer
+   + =sevil-use-linum=: Use linum plugin with show line numbers
+   + =sevil-use-which-key=: Use which-key to show possible hot keys
+   + =sevil-language-list=: Enable corresponding languages in the list by their
+     abbreviations (listed above).

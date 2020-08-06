@@ -95,7 +95,6 @@
 ;; docker
 (use-package docker
   :defines docker-image-run-arguments
-  :init (setq docker-container-shell-file-name "/bin/bash")
   :config
   (use-package docker-tramp :after (docker))
   (use-package dockerfile-mode :after (docker)))

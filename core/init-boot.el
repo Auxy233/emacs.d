@@ -11,22 +11,6 @@
 (when (fboundp 'set-charset-priority)
   (set-charset-priority 'unicode))
 
-;; explicitly set the prefered coding systems to avoid annoying prompt
-;; from emacs (especially on Microsoft Windows)
-(prefer-coding-system 'utf-8)
-(set-language-environment 'utf-8)
-(set-default-coding-systems 'utf-8)
-(set-buffer-file-coding-system 'utf-8)
-(set-clipboard-coding-system 'utf-8)
-(set-file-name-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(set-selection-coding-system 'utf-8)
-(modify-coding-system-alist 'process "*" 'utf-8)
-
-(setq locale-coding-system 'utf-8
-      default-process-coding-system '(utf-8 . utf-8))
-
 ;; gc hack
 (use-package gcmh
   :init
@@ -114,19 +98,6 @@
     "Show trailing spaces and delete on saving."
     (setq show-trailing-whitespace t)
     (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
-
-;; mouse & smooth Scroll
-;; scroll one line at a time (less "jumpy" than defaults)
-(when (display-graphic-p)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1))
-        mouse-wheel-progressive-speed nil))
-
-(setq scroll-step 1
-      scroll-margin 0
-      scroll-conservatively 100000)
-
-;; shorter options
-(fset 'yes-or-no-p 'y-or-n-p)
 
 (setq-default major-mode 'text-mode
               fill-column 80
