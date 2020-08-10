@@ -102,7 +102,6 @@
 
 (use-package dap-mode
   :diminish
-  :functions dap-hydra/nil
   :bind (:map lsp-mode-map
               ("<f5>" . dap-debug)
               ("M-<f5>" . dap-hydra))

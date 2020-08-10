@@ -65,4 +65,6 @@
    + =sevil-use-linum=: Use linum plugin with show line numbers
    + =sevil-use-which-key=: Use which-key to show possible hot keys
    + =sevil-language-list=: Enable corresponding languages in the list by their
-     abbreviations (listed above).
+     abbreviations (listed above)
+   + =sevil-swap-colon=: swap =;= and =:= for evil
+   + =sevil-swap-parentheses-square-bracket=: swap =()= and =[]= keys

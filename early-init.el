@@ -52,4 +52,13 @@
 (push '(vertical-scroll-bars) default-frame-alist) ;; no scroll bar
 (when (featurep 'ns)
   (push '(ns-transparent-titlebar . t) default-frame-alist))
+
+;; add scratch message
+(setq initial-scratch-message
+      (concat
+       ";; Project from https://github.com/GaloisNeko/.emacs.d by GaloisNeko.\n"
+       ";; Use `,` or `SPC` to invoke leader keys.\n"
+       ";; The detailed keybindings aer in `core/init-evil.el`.\n"
+       ";; Or customize in `custom.el`.\n\n"))
+
 ;;; early-init ends here

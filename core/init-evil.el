@@ -19,23 +19,37 @@
   (use-package general)
 
   ;; I write lisp
-  (progn
-    (keyboard-translate ?\( ?\[)
-    (keyboard-translate ?\[ ?\()
-    (keyboard-translate ?\) ?\])
-    (keyboard-translate ?\] ?\)))
+  (when sevil-swap-parentheses-square-bracket
+    (progn
+      (keyboard-translate ?\( ?\[)
+      (keyboard-translate ?\[ ?\()
+      (keyboard-translate ?\) ?\])
+      (keyboard-translate ?\] ?\))))
 
   (general-define-key
    :states '(normal visual)
    "C-r" 'undo-fu-only-redo
    "u" 'undo-fu-only-undo
-   ";" 'evil-ex
-   ":" 'evil-repeat-find-char
 
    ;; avy jump
-   "gs" 'evil-avy-goto-char-timer
+   "gc" 'evil-avy-goto-char-timer
    "go" 'evil-avy-goto-word-or-subword-1
-   "gl" 'evil-avy-goto-line)
+   "gl" 'evil-avy-goto-line
+   "gw" 'evil-avy-goto-word-1
+   "gr" 'avy-resume
+   "gp" 'avy-prev
+
+   ;; tranpose
+   "tt" 'transpose-chars
+   "tl" 'transpose-lines
+   "tw" 'transpose-words)
+
+  ;; less tired vim
+  (when sevil-swap-colon
+    (general-define-key
+     :states '(normal visual)
+     ";" 'evil-ex
+     ":" 'evil-repeat-find-char))
 
   ;; the comma leader key serves for emacs managemnt
   (general-create-definer edit-leader-def
@@ -51,6 +65,7 @@
     "a" '(:ignore t :which-key "apps")
     "ac" 'calendar
     "ai" 'erc
+    "ar" 'recentf-open-files
 
     ;; buffers
     "b" '(:ignore t :which-key "buffer")
@@ -141,8 +156,6 @@
 
     ;; projectile
     "p" '(:keymap projectile-command-map :which-key "projectile")
-
-    "r" 'recentf-open-files
 
     ;; symbol overlays
     "s" '(:ignore t :which-key "symbol")

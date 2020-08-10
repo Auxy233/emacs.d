@@ -23,7 +23,7 @@
   :group 'sevil-setting
   :type '(boolean))
 
-(defcustom sevil-use-which-key nil
+(defcustom sevil-use-which-key t
   "Show key hints."
   :group 'sevil-setting
   :type '(boolean))
@@ -42,6 +42,16 @@
   "The list of languages tocustom-file."
   :group 'sevil-setting
   :type '(list symbol))
+
+(defcustom sevil-swap-colon t
+  "Swap ; and : usage."
+  :group 'sevil-setting
+  :type '(boolean))
+
+(defcustom sevil-swap-parentheses-square-bracket t
+  "Swap () and []."
+  :group 'sevil-setting
+  :type '(boolean))
 
 ;; helper constants
 (defconst sys/linuxp

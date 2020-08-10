@@ -9,6 +9,7 @@
 (setq
    pg-init--script-full-path (concat user-emacs-directory "straight/repos/PG/proof-general.el")
    pg-init--pg-root (file-name-directory pg-init--script-full-path))
+
 (use-package proof-general
   :mode ("\\.v$" . coq-mode)
   :custom
