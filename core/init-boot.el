@@ -13,6 +13,7 @@
 
 ;; gc hack
 (use-package gcmh
+  :diminish
   :init
   (setq gcmh-verbose             t
         gcmh-lows-cons-threshold #x800000

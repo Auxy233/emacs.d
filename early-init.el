@@ -46,6 +46,9 @@
 ;; shorter options
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; default directory
+(setq default-directory "~")
+
 ;; better gui
 (push '(menu-bar-lines . 0) default-frame-alist) ;; remove mini menu
 (push '(tool-bar-lines . 0) default-frame-alist) ;; remove tool icon
@@ -57,8 +60,8 @@
 (setq initial-scratch-message
       (concat
        ";; Project from https://github.com/GaloisNeko/.emacs.d by GaloisNeko.\n"
-       ";; Use `,` or `SPC` to invoke leader keys.\n"
-       ";; The detailed keybindings aer in `core/init-evil.el`.\n"
+       ";; Use `SPC` to invoke leader keys.\n"
+       ";; The detailed keybindings are in `core/init-evil.el`.\n"
        ";; Or customize in `custom.el`.\n\n"))
 
 ;;; early-init ends here

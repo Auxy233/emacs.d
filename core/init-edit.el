@@ -19,7 +19,6 @@
 ;; Work with large file
 (use-package so-long
   :ensure nil
-  :when (>= emacs-major-version 27)
   :hook (after-init . global-so-long-mode))
 
 ;; Click to browse URL or to send to e-mail address
@@ -39,18 +38,10 @@
 ;; Pass a URL to a WWW browser
 (use-package browse-url
   :ensure nil
-  :defines dired-mode-map
-  :bind (("C-c C-z ." . browse-url-at-point)
-         ("C-c C-z b" . browse-url-of-buffer)
-         ("C-c C-z r" . browse-url-of-region)
-         ("C-c C-z u" . browse-url)
-         ("C-c C-z e" . browse-url-emacs)
-         ("C-c C-z v" . browse-url-of-file)))
+  :defines dired-mode-map)
 
 ;; Kill text between the point and the character CHAR
-(use-package avy-zap
-  :bind (("M-z" . avy-zap-to-char-dwim)
-         ("M-Z" . avy-zap-up-to-char-dwim)))
+(use-package avy-zap)
 
 ;; Quickly follow links
 (use-package ace-link
@@ -103,8 +94,7 @@
 
 ;; Framework for mode-specific buffer indexes
 (use-package imenu
-  :ensure nil
-  :bind (("C-." . imenu)))
+  :ensure nil)
 
 ;; Windows-scroll command
 (use-package pager
@@ -120,9 +110,7 @@
 ;; Undo/Redo
 (use-package undo-fu
   :bind (([remap undo] . undo-fu-only-undo)
-         ([remap undo-only] . undo-fu-only-undo)
-         ("C-?" . undo-fu-only-redo)
-         ("M-_" . undo-fu-only-redo)))
+         ([remap undo-only] . undo-fu-only-undo)))
 
 ;; Goto last change
 (use-package goto-last-change

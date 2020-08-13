@@ -102,6 +102,9 @@
 
 ;; a minimum modeline, doom-modeline is too heavy
 (use-package mini-modeline
+  :custom-face
+  ; use dracula color
+  (mini-modeline-mode-line ((t (:background "#bd93f9" :box nil :height 0.14))))
   :config
   (mini-modeline-mode t))
 

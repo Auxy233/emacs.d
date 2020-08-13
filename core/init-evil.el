@@ -1,6 +1,8 @@
 ;;; init-evil.el --- sweet devil mode
 ;;; Commentary:
-;; use evil for keybindings
+;; use `evil' for editing and manipulate buffers
+;; use `ctrl' to invoke hydra
+;; use `s-' to invke Emacs style KB for editor management
 
 ;;; Code:
 (require 'init-const)
@@ -26,6 +28,43 @@
       (keyboard-translate ?\) ?\])
       (keyboard-translate ?\] ?\))))
 
+  ;; emacs key maps
+  (general-define-key
+   "s-q" 'evil-force-normal-state
+
+   ;; applications
+   "s-a" '(:keymap nil :which-key "apps")
+   "s-a c" 'calendar
+   "s-a i" 'erc
+   "s-a s" 'shell-pop
+   "s-a r" 'recentf-open-files
+
+   ;; buffers
+   "s-b" '(:ignore t :which-key "buffer")
+   "s-b b" 'ivy-switch-buffer
+   "s-b i" 'ibuffer
+   "s-b k" 'kill-this-buffer
+   "s-b n" 'next-buffer
+   "s-b p" 'previous-buffer
+   "s-b r" 'revert-buffer
+
+   ;; files
+   "s-f" '(:keymap nil :which-key "files")
+   "s-f F" 'find-file-other-window
+   "s-f J" 'dired-jump-other-window
+   "s-f d" 'delete-file
+   "s-f f" 'find-file
+   "s-f j" 'dired-jump
+   "s-f m" 'make-directory
+   "s-f r" 'rename-file
+   "s-f t" 'treemacs
+   "s-f a" 'treemacs-add-project
+
+   "s-l" 'lsp-command-map
+
+   "s-p" 'projectile-command-map)
+
+  ;; evil key maps
   (general-define-key
    :states '(normal visual)
    "C-r" 'undo-fu-only-redo
@@ -34,15 +73,11 @@
    ;; avy jump
    "gc" 'evil-avy-goto-char-timer
    "go" 'evil-avy-goto-word-or-subword-1
-   "gl" 'evil-avy-goto-line
+   "gi" 'evil-avy-goto-line
+   "gl" 'goto-line
    "gw" 'evil-avy-goto-word-1
    "gr" 'avy-resume
-   "gp" 'avy-prev
-
-   ;; tranpose
-   "tt" 'transpose-chars
-   "tl" 'transpose-lines
-   "tw" 'transpose-words)
+   "gp" 'avy-prev)
 
   ;; less tired vim
   (when sevil-swap-colon
@@ -53,28 +88,13 @@
 
   ;; the comma leader key serves for emacs managemnt
   (general-create-definer edit-leader-def
-    :prefix ","
+    :prefix "SPC"
     :states '(normal visual emacs))
 
   (edit-leader-def
     ;; meta options
-    "," 'counsel-M-x
+    "SPC" 'counsel-M-x
     "TAB" 'next-buffer
-
-    ;; applications
-    "a" '(:ignore t :which-key "apps")
-    "ac" 'calendar
-    "ai" 'erc
-    "ar" 'recentf-open-files
-
-    ;; buffers
-    "b" '(:ignore t :which-key "buffer")
-    "bb" 'ivy-switch-buffer
-    "bi" 'ibuffer
-    "bk" 'kill-this-buffer
-    "bn" 'next-buffer
-    "bp" 'previous-buffer
-    "br" 'revert-buffer
 
     ;; flycheck
     "C" '(:ignore t :which-key "check")
@@ -121,16 +141,10 @@
     "cw" 'counsel-colors-web
     "cz" 'counsel-fzf
 
-    ;; files
-    "f" '(:ignore t :which-key "files")
-    "fF" 'find-file-other-window
-    "fJ" 'dired-jump-other-window
-    "fd" 'delete-file
-    "ff" 'find-file
-    "fj" 'dired-jump
-    "fm" 'make-directory
-    "fr" 'rename-file
-    "ft" 'treemacs
+    ;; delete
+    "d" '(:ignore t :which-key "delete")
+    "dc" 'avy-zap-to-char-dwim
+    "dC" 'avy-zap-up-to-char-dwim
 
     ;; git
     "g" '(:ignore t :which-key "git")
@@ -154,9 +168,6 @@
     "ho" 'hl-todo-occur
     "hi" 'hl-todo-insert
 
-    ;; projectile
-    "p" '(:keymap projectile-command-map :which-key "projectile")
-
     ;; symbol overlays
     "s" '(:ignore t :which-key "symbol")
     "sp" 'symbol-overlay-put
@@ -166,39 +177,38 @@
     "sB" 'symbol-overlay-switch-backward
     "sr" 'symbol-overlay-remove-all
 
+    ;; tranpose
+    "t" '(:ignore t :which-key "transpose")
+    "tt" 'transpose-chars
+    "tl" 'transpose-lines
+    "tw" 'transpose-words
+
+    ;; url
+    "u" '(:ignore t :which-key "url")
+    "u." 'browse-url-at-point
+    "ub" 'browse-url-of-buffer
+    "ur" 'browse-url-of-region
+    "uu" 'browse-url
+    "ue" 'browse-url-emacs
+    "uv" 'browse-url-of-file
+
     ;; misc
     "x" '(:ignore t :which-key "misc")
     "xa" 'swiper-all
-    "xh" 'shell-pop
     "xi" 'imenu
     "xj" 'evil-show-jumps
     "xm" 'evil-show-marks
     "xr" 'counsel-rg
     "xs" 'swiper
+    "xc" 'quickrun
+    "xd" 'docker
 
     ;; windows
     "w" '(:keymap evil-window-map :which-key "window")
     "w-" 'split-window-vertically
     "w/" 'split-window-horizontally
     "wr" 'winner-redo
-    "wu" 'winner-undo)
-
-  ;; `SPC' is shadowed in some modes (e.g. calendar)
-  ;; so we use it for programming only, rather than managing emacs
-  (general-create-definer prog-leader-def
-    :prefix "SPC"
-    :states '(normal visual))
-
-  ;; bind `lsp-mode' to `SPC'
-  (evil-define-key '(normal visual) lsp-mode-map (kbd "SPC") lsp-command-map)
-
-  (prog-leader-def
-    ;; lsp is binded here as well
-    ;; so avoid using following characters:
-    ;; `s` `=` `F` `T` `g` `h` `r` `a` `G`
-    "SPC" 'counsel-M-x
-    "xc" 'quickrun
-    "xd" 'docker))
+    "wu" 'winner-undo))
 
 ;; some modes are not natively supported by evil
 (use-package evil-collection
