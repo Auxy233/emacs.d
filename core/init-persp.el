@@ -1,6 +1,6 @@
 ;;; init-persp.el --- Load back files
 ;;; Commentary:
-;;
+;; Workspace for Emacs.
 
 ;;; Code:
 (use-package persp-mode
@@ -8,7 +8,7 @@
   :defines (recentf-exclude ivy-ignore-buffers ivy-sort-functions-alist)
   :commands (get-current-persp persp-contain-buffer-p)
   :hook ((after-init . persp-mode))
-  :init (setq persp-keymap-prefix (kbd "C-x p")
+  :init (setq persp-keymap-prefix (kbd "s-w")
               persp-nil-name "default"
               persp-set-last-persp-for-new-frames nil
               persp-kill-foreign-buffer-behaviour 'kill

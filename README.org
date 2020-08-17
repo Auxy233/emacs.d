@@ -56,6 +56,16 @@
    | Latex       | latex            | latex        |
    |-------------+------------------+--------------|
 
+** Key Bindings
+
+   The detailed keybindings are in =core/init-evil=. Sweet Devil use a mixed keybindings
+   of Evil style and Emacs style after a long time of pure Evil style KB due to
+   the compatibility issues of some Emacs major mode. The Evil leader key is
+   /SPC/. And I use /s-/ extensively for Emacs style KB to avoid overuse of
+   little fingers. /C-/ style KB is usually linked with Hydra.
+
+   You can use =SPC ?= to view Evil KB or =C-h b= to view all KB.
+
 ** Customization
 
    You can customize the config through =custom.el=, which will be generated

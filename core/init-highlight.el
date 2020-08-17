@@ -96,10 +96,11 @@
 ;; colorize color names in buffers
 (use-package rainbow-mode
   :diminish
-  :bind (:map help-mode-map
-              ("w" . rainbow-mode))
   :hook ((html-mode php-mode) . rainbow-mode)
   :config
+  (general-define-key
+   :keymaps help-mode-map
+   "w" 'rainbow-mode)
   ;; HACK: Use overlay instead of text properties to override `hl-line' faces.
   ;; @see https://emacs.stackexchange.com/questions/36420
   (with-no-warnings

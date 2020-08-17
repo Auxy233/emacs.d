@@ -17,52 +17,77 @@
   (use-package evil-magit
     :after evil magit)
 
-  ;; start defining keybinding
-  (use-package general)
+  (use-package evil-surround
+    :hook (evil-mode . global-evil-surround-mode))
 
-  ;; I write lisp
-  (when sevil-swap-parentheses-square-bracket
-    (progn
-      (keyboard-translate ?\( ?\[)
-      (keyboard-translate ?\[ ?\()
-      (keyboard-translate ?\) ?\])
-      (keyboard-translate ?\] ?\))))
+  ;; some modes are not natively supported by evil
+  (use-package evil-collection
+    :hook (evil-mode . evil-collection-init)
+    :custom
+    (evil-collection-company-setup t)
+    (evil-collection-calendar-want-org-bindings nil)
+    (evil-collection-outline-bind-tab-p t)
+    (evil-collection-setup-minibuffer t)
+    (evil-collection-setup-debugger-keys t)
+    ))
 
+;; I write lisp
+(when sevil-swap-parentheses-square-bracket
+  (progn
+    (keyboard-translate ?\( ?\[)
+    (keyboard-translate ?\[ ?\()
+    (keyboard-translate ?\) ?\])
+    (keyboard-translate ?\] ?\))))
+
+;; start defining keybinding
+(use-package general
+  :config
   ;; emacs key maps
   (general-define-key
+   "s-s" 'isearch-forward
+
    "s-q" 'evil-force-normal-state
 
    ;; applications
    "s-a" '(:keymap nil :which-key "apps")
-   "s-a c" 'calendar
-   "s-a i" 'erc
-   "s-a s" 'shell-pop
-   "s-a r" 'recentf-open-files
+   "s-a s-c" 'calendar
+   "s-a s-i" 'erc
+   "s-a s-s" 'shell-pop
+   "s-a s-r" 'recentf-open-files
 
    ;; buffers
-   "s-b" '(:ignore t :which-key "buffer")
-   "s-b b" 'ivy-switch-buffer
-   "s-b i" 'ibuffer
-   "s-b k" 'kill-this-buffer
-   "s-b n" 'next-buffer
-   "s-b p" 'previous-buffer
-   "s-b r" 'revert-buffer
+   "s-b" '(:keymap nil :which-key "buffer")
+   "s-b s-b" 'ivy-switch-buffer
+   "s-b s-i" 'ibuffer
+   "s-b s-k" 'kill-this-buffer
+   "s-b s-n" 'next-buffer
+   "s-b s-p" 'previous-buffer
+   "s-b s-r" 'revert-buffer
 
    ;; files
    "s-f" '(:keymap nil :which-key "files")
-   "s-f F" 'find-file-other-window
-   "s-f J" 'dired-jump-other-window
-   "s-f d" 'delete-file
-   "s-f f" 'find-file
-   "s-f j" 'dired-jump
-   "s-f m" 'make-directory
-   "s-f r" 'rename-file
-   "s-f t" 'treemacs
-   "s-f a" 'treemacs-add-project
+   "s-f f" 'find-file-other-window
+   "s-f j" 'dired-jump-other-window
+   "s-f s-d" 'delete-file
+   "s-f s-f" 'find-file
+   "s-f s-j" 'dired-jump
+   "s-f s-m" 'make-directory
+   "s-f s-r" 'rename-file
+   "s-f s-t" 'treemacs
+   "s-f s-a" 'treemacs-add-project
+   "s-f s-l" 'list-directory
 
    "s-l" 'lsp-command-map
 
-   "s-p" 'projectile-command-map)
+   "s-p" 'projectile-command-map
+
+   "s-w" 'persp-mode-map
+
+   ;; emacs management
+   "s-e" '(:keymap nil :which-key "emacs")
+   "s-e q" 'kill-emacs
+   "s-e f" 'delete-frame
+   "s-e s" 'save-buffer)
 
   ;; evil key maps
   (general-define-key
@@ -179,6 +204,7 @@
 
     ;; tranpose
     "t" '(:ignore t :which-key "transpose")
+    "ta" 'align
     "tt" 'transpose-chars
     "tl" 'transpose-lines
     "tw" 'transpose-words
@@ -195,6 +221,7 @@
     ;; misc
     "x" '(:ignore t :which-key "misc")
     "xa" 'swiper-all
+    "xb" 'dap-debug
     "xi" 'imenu
     "xj" 'evil-show-jumps
     "xm" 'evil-show-marks
@@ -203,26 +230,16 @@
     "xc" 'quickrun
     "xd" 'docker
 
+    ;; yasnippet
+    "yy" 'yas-visit-snippet-file
+    "yc" 'yas--snippet-create
+
     ;; windows
     "w" '(:keymap evil-window-map :which-key "window")
     "w-" 'split-window-vertically
     "w/" 'split-window-horizontally
     "wr" 'winner-redo
     "wu" 'winner-undo))
-
-;; some modes are not natively supported by evil
-(use-package evil-collection
-  :hook (evil-mode . evil-collection-init)
-  :custom
-  (evil-collection-company-setup t)
-  (evil-collection-calendar-want-org-bindings nil)
-  (evil-collection-outline-bind-tab-p t)
-  (evil-collection-setup-minibuffer t)
-  (evil-collection-setup-debugger-keys t)
-  )
-
-(use-package evil-surround
-  :hook (evil-mode . global-evil-surround-mode))
 
 ;; Tips for next keystroke
 (when sevil-use-which-key

@@ -11,7 +11,7 @@
   (error "This Emacs is too old to support"))
 
 ;; comment out for debugging
-(setq debug-on-error nil)
+(setq debug-on-error t)
 
 ;; initialize straight
 (defvar bootstrap-version)

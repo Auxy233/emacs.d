@@ -60,8 +60,7 @@
 (setq initial-scratch-message
       (concat
        ";; Project from https://github.com/GaloisNeko/.emacs.d by GaloisNeko.\n"
-       ";; Use `SPC` to invoke leader keys.\n"
-       ";; The detailed keybindings are in `core/init-evil.el`.\n"
+       ";; Use `C-h b' to see all keybindings or `SPC ?' for Evil keys.\n"
        ";; Or customize in `custom.el`.\n\n"))
 
 ;;; early-init ends here

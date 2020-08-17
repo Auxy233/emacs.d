@@ -1,33 +1,20 @@
 ;;; init-ivy.el --- ivy configuration
 ;;; Commentary:
 ;; ivy fuzzy complement framework
+;; thiner but powerful enough
 
 ;;; Code:
 (use-package counsel
   :diminish ivy-mode counsel-mode
-  :bind (("C-s"   . swiper-isearch)
-         ("C-r"   . swiper-isearch-backward)
-
-         ("C-c v p" . ivy-push-view)
+  :bind (("C-c v p" . ivy-push-view)
          ("C-c v o" . ivy-pop-view)
-
-         :map counsel-mode-map
-         ([remap swiper] . counsel-grep-or-swiper)
-         ([remap swiper-backward] . counsel-grep-or-swiper-backward)
-         ([remap dired] . counsel-dired)
-         ([remap set-variable] . counsel-set-variable)
-         ([remap insert-char] . counsel-unicode-char)
-
          :map ivy-minibuffer-map
          ("C-w" . ivy-yank-word)
-
          :map counsel-find-file-map
          ("C-h" . counsel-up-directory)
-
          :map swiper-map
          ("M-s" . swiper-isearch-toggle)
          ("M-%" . swiper-query-replace)
-
          :map isearch-mode-map
          ("M-s" . swiper-isearch-toggle))
   :hook ((after-init . ivy-mode)
@@ -48,6 +35,16 @@
   (setq counsel-find-file-at-point t
         counsel-yank-pop-separator "\n────────\n")
   :config
+  (general-define-key
+   :keymap counsel-mode-map
+         [remap isearch-forward] 'swiper-isearch
+         [remap isearch-backward] 'swiper-isearch-backward
+         [remap swiper] 'counsel-grep-or-swiper
+         [remap swiper-backward] 'counsel-grep-or-swiper-backward
+         [remap dired] 'counsel-dired
+         [remap set-variable] 'counsel-set-variable
+         [remap insert-char] 'counsel-unicode-char)
+
   ;; enhance M-x
   (use-package amx
     :init (setq amx-history-length 20))
@@ -101,9 +98,9 @@ This is for use in `ivy-re-builders-alist'."
 
   ;; integrate yasnippet
   (use-package ivy-yasnippet
-    :commands ivy-yasnippet--preview
-    :bind ("C-c C-y" . ivy-yasnippet)
-    :config (advice-add #'ivy-yasnippet--preview :override #'ignore))
+    :config
+    (general-define-key
+     [remap yas-visit-snippet-file] 'ivy-yasnippet))
 
   ;; select from xref candidates with Ivy
   (use-package ivy-xref
@@ -136,6 +133,13 @@ This is for use in `ivy-re-builders-alist'."
   (use-package counsel-tramp
     :bind (:map counsel-mode-map
            ("C-c c T" . counsel-tramp))))
+
+;; lsp supports
+(use-package lsp-ivy
+  :after lsp-mode
+  :bind (:map lsp-mode-map
+              ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)
+              ("C-s-." . lsp-ivy-global-workspace-symbol)))
 
 ;; More friendly display transformer for Ivy
 (use-package ivy-rich

@@ -27,23 +27,22 @@
                '(haskell-left-arrows
                  (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
                  (modes quote (haskell-mode literate-haskell-mode))))
-  :bind (("C-x a a" . align)
-         :map haskell-mode-map
-         ("C-c h" . hoogle)
-         ("C-o"   . open-line)
+  :bind (:map haskell-mode-map
+         ("C-c h"   . hoogle)
+         ("C-o"     . open-line)
          ("C-c C-c" . haskell-compile)
          :map haskell-cabal-mode-map
-         ("C-c h" . hoogle)
+         ("C-c h"   . hoogle)
          ("C-c C-c" . haskell-compile))
   :custom
-    (haskell-compile-cabal-build-command "stack build --ghc-options=-Wall")
-    (haskell-compile-command "ghc -dynamic -Wall -ferror-spans -fforce-recomp -c %s")
-    (haskell-process-suggest-haskell-docs-imports t)
-    (haskell-process-suggest-remove-import-lines  t)
-    (haskell-process-log                          t)
-    (haskell-process-suggest-hoogle-imports       t)
-    (haskell-tags-on-save                         t)
-    (inhibit-startup-screen                       t))
+  (haskell-compile-cabal-build-command "stack build --ghc-options=-Wall")
+  (haskell-compile-command "ghc -dynamic -Wall -ferror-spans -fforce-recomp -c %s")
+  (haskell-process-suggest-haskell-docs-imports t)
+  (haskell-process-suggest-remove-import-lines  t)
+  (haskell-process-log                          t)
+  (haskell-process-suggest-hoogle-imports       t)
+  (haskell-tags-on-save                         t)
+  (inhibit-startup-screen                       t))
 
 (use-package lsp-haskell
   :hook (haskell-mode . lsp)

@@ -97,7 +97,7 @@
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
-;; HACK load it outside use-oackage due to some bugs
+;; HACK load it outside use-package due to some bugs
 (load-theme 'doom-dracula t)
 
 ;; a minimum modeline, doom-modeline is too heavy
@@ -112,6 +112,7 @@
 (setq window-divider-default-places t
       window-divider-default-bottom-width 1
       window-divider-default-right-width 1)
+
 (add-hook 'window-setup-hook #'window-divider-mode)
 
 (when sys/macp

@@ -105,7 +105,7 @@
         (dependencies (rest list)))
     (seq-remove (lambda (e) (executable-find e)) dependencies)))
 
-(defun update-all ()
+(defun sevil-update-all ()
   "Update all the pacakges."
   (interactive
    (progn

@@ -16,6 +16,7 @@
          ("C-n" . company-select-next)
          ("<tab>" . company-complete-common-or-cycle)
          ("<backtab>" . my/company-yasnippet)
+         ("<C-return>" . company-complete-selection)
          ;; ("C-c C-y" . my-company-yasnippet)
          :map company-search-map
          ("C-p" . company-select-previous)
@@ -60,14 +61,18 @@
   :hook ((company-mode . company-prescient-mode)
          (company-mode . prescient-persist-mode)))
 
+(when (display-graphic-p)
+  (use-package company-box
+    :hook (company-mode . company-box-mode)))
 
 ;; Popup documentation for completion candidates
-(when (and (not emacs/>=26p) (display-graphic-p))
-  (use-package company-quickhelp
-    :defines company-quickhelp-delay
-    :bind (:map company-active-map
-                ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
-    :hook (global-company-mode . company-quickhelp-mode)))
+(use-package company-quickhelp
+  :defines company-quickhelp-delay
+  :custom
+  (pos-tip-use-relative-corrdinates t)
+  :bind (:map company-active-map
+              ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
+  :hook (global-company-mode . company-quickhelp-mode))
 
 (use-package lsp-mode
   :hook
@@ -92,19 +97,11 @@
               ([remap xref-find-references] . lsp-ui-peek-find-references))
   :hook (lsp-mode . lsp-ui-mode))
 
-(use-package lsp-ivy
-  :after lsp-mode
-  :bind (:map lsp-mode-map
-              ([remap xref-find-apropos] . lsp-ivy-workspace-symbol)
-              ("C-s-." . lsp-ivy-global-workspace-symbol)))
-
 (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 (use-package dap-mode
   :diminish
-  :bind (:map lsp-mode-map
-              ("<f5>" . dap-debug)
-              ("M-<f5>" . dap-hydra))
+  :after lsp
   :hook ((python-mode . (lambda () (require 'dap-python)))
          ((c-mode c++-mode objc-mode swift) . (lambda () (require 'dap-lldb)))))
 

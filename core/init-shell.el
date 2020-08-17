@@ -91,7 +91,6 @@
 
 ;; Shell Pop
 (use-package shell-pop
-  :bind ([f9] . shell-pop)
   :init
   (setq shell-pop-window-size 35
         shell-pop-shell-type

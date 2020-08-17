@@ -96,39 +96,21 @@
 (use-package imenu
   :ensure nil)
 
-;; Windows-scroll command
-(use-package pager
-  :bind (([remap scroll-up-command] . pager-page-down)
-         ([remap scroll-down-command] . pager-page-up)
-         ([next]   . pager-page-down)
-         ([prior]  . pager-page-up)
-         ([M-up]   . pager-row-up)
-         ([M-kp-8] . pager-row-up)
-         ([M-down] . pager-row-down)
-         ([M-kp-2] . pager-row-down)))
-
 ;; Undo/Redo
 (use-package undo-fu
-  :bind (([remap undo] . undo-fu-only-undo)
-         ([remap undo-only] . undo-fu-only-undo)))
-
-;; Goto last change
-(use-package goto-last-change
-  :bind ("C-," . goto-last-change))
-
-;; Record and jump to the last point in the buffer
-(use-package goto-last-point
-  :diminish
-  :bind ("C-M-," . goto-last-point)
-  :hook (after-init . goto-last-point-mode))
+  :config (general-define-key
+           [remap undo] 'undo-fu-only-undo
+           [remap undo-only] 'undo-fu-only-undo))
 
 ;; Preview when `goto-char'
 (use-package goto-char-preview
-  :bind ([remap goto-char] . goto-char-preview))
+  :config (general-define-key
+           [remap goto-char] 'goto-char-preview))
 
 ;; Preview when `goto-line'
 (use-package goto-line-preview
-  :bind ([remap goto-line] . goto-line-preview))
+  :config (general-define-key
+           [remap goto-line] 'goto-line-preview))
 
 ;; Handling capitalized subwords in a nomenclature
 (use-package subword

@@ -19,25 +19,29 @@
 ;; use magit for git VC
 (use-package magit
   :mode (("\\COMMIT_EDITMSG\\'" . text-mode)
-         ("\\MERGE_MSG\\'" . text-mode)))
+         ("\\MERGE_MSG\\'" . text-mode))
+  :config
+  ;; access git forges from magit
+  (use-package forge)
 
-;; access git forges from magit
-(use-package forge :after (magit))
+  ;; show TODOs in magit
+  (use-package magit-todos
+    :config
+    (general-define-key
+     :keymaps magit-todos-section-map
+     "j" . nil)
+    (general-define-key
+     :keymaps magit-todos-item-section-map
+     "j" . nil)
+    :hook
+    (magit-status-mode . magit-todos-mode))
 
-;; show TODOs in magit
-(use-package magit-todos
-  :after (magit)
-  :bind (:map magit-todos-section-map
-              ("j" . nil)
-              :map magit-todos-item-section-map
-              ("j" . nil))
-  :hook
-  (magit-status-mode . magit-todos-mode))
-
-;; walk through git revisions of a file
-(use-package git-timemachine
-  :bind (:map vc-prefix-map
-              ("t" . git-timemachine)))
+  ;; walk through git revisions of a file
+  (use-package git-timemachine
+    :config
+    (general-define-key
+     :keymaps vc-prefix-map
+     "t" . git-timemachine)))
 
 ;; git related modes
 (use-package gitattributes-mode)
