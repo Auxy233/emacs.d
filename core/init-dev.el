@@ -26,22 +26,12 @@
 
   ;; show TODOs in magit
   (use-package magit-todos
-    :config
-    (general-define-key
-     :keymaps magit-todos-section-map
-     "j" . nil)
-    (general-define-key
-     :keymaps magit-todos-item-section-map
-     "j" . nil)
-    :hook
-    (magit-status-mode . magit-todos-mode))
+    :hook (magit-status-mode . magit-todos-mode)))
 
-  ;; walk through git revisions of a file
-  (use-package git-timemachine
-    :config
-    (general-define-key
-     :keymaps vc-prefix-map
-     "t" . git-timemachine)))
+;; walk through git revisions of a file
+(use-package git-timemachine
+  :bind (:map vc-prefix-map
+              ("t" . git-timemachine)))
 
 ;; git related modes
 (use-package gitattributes-mode)

@@ -98,19 +98,16 @@
 
 ;; Undo/Redo
 (use-package undo-fu
-  :config (general-define-key
-           [remap undo] 'undo-fu-only-undo
-           [remap undo-only] 'undo-fu-only-undo))
+  :bind (([remap undo] . undo-fu-only-undo)
+         ([remap undo-only] . undo-fu-only-undo)))
 
 ;; Preview when `goto-char'
 (use-package goto-char-preview
-  :config (general-define-key
-           [remap goto-char] 'goto-char-preview))
+  :bind (([remap goto-char] . goto-char-preview)))
 
 ;; Preview when `goto-line'
 (use-package goto-line-preview
-  :config (general-define-key
-           [remap goto-line] 'goto-line-preview))
+  :bind (([remap goto-line] . goto-line-preview)))
 
 ;; Handling capitalized subwords in a nomenclature
 (use-package subword

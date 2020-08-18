@@ -16,7 +16,15 @@
          ("M-s" . swiper-isearch-toggle)
          ("M-%" . swiper-query-replace)
          :map isearch-mode-map
-         ("M-s" . swiper-isearch-toggle))
+         ("M-s" . swiper-isearch-toggle)
+         :map counsel-mode-map
+         ([remap isearch-forward] . swiper-isearch)
+         ([remap isearch-backward] . swiper-isearch-backward)
+         ([remap swiper] . counsel-grep-or-swiper)
+         ([remap swiper-backward] . counsel-grep-or-swiper-backward)
+         ([remap dired] . counsel-dired)
+         ([remap set-variable] . counsel-set-variable)
+         ([remap insert-char] . counsel-unicode-char))
   :hook ((after-init . ivy-mode)
          (ivy-mode . counsel-mode))
   :init
@@ -35,16 +43,6 @@
   (setq counsel-find-file-at-point t
         counsel-yank-pop-separator "\n────────\n")
   :config
-  (general-define-key
-   :keymap counsel-mode-map
-         [remap isearch-forward] 'swiper-isearch
-         [remap isearch-backward] 'swiper-isearch-backward
-         [remap swiper] 'counsel-grep-or-swiper
-         [remap swiper-backward] 'counsel-grep-or-swiper-backward
-         [remap dired] 'counsel-dired
-         [remap set-variable] 'counsel-set-variable
-         [remap insert-char] 'counsel-unicode-char)
-
   ;; enhance M-x
   (use-package amx
     :init (setq amx-history-length 20))
@@ -85,8 +83,8 @@ This is for use in `ivy-re-builders-alist'."
             (t . ivy-prescient-re-builder))
           ivy-prescient-sort-commands
           '(:not swiper swiper-isearch ivy-switch-buffer
-            counsel-grep counsel-git-grep counsel-ag counsel-imenu
-            counsel-yank-pop counsel-recentf counsel-buffer-or-recentf))
+                 counsel-grep counsel-git-grep counsel-ag counsel-imenu
+                 counsel-yank-pop counsel-recentf counsel-buffer-or-recentf))
 
     (ivy-prescient-mode 1))
 
@@ -98,9 +96,7 @@ This is for use in `ivy-re-builders-alist'."
 
   ;; integrate yasnippet
   (use-package ivy-yasnippet
-    :config
-    (general-define-key
-     [remap yas-visit-snippet-file] 'ivy-yasnippet))
+    :bind (([remap yas-visit-snippet-file] . ivy-yasnippet)))
 
   ;; select from xref candidates with Ivy
   (use-package ivy-xref
@@ -113,7 +109,7 @@ This is for use in `ivy-re-builders-alist'."
   (use-package flyspell-correct-ivy
     :after flyspell
     :bind (:map flyspell-mode-map
-           ([remap flyspell-correct-word-before-point] . flyspell-correct-previous-word-generic)))
+                ([remap flyspell-correct-word-before-point] . flyspell-correct-previous-word-generic)))
 
   ;; quick launch apps
   (cond
@@ -122,17 +118,17 @@ This is for use in `ivy-re-builders-alist'."
    (sys/macp
     (use-package counsel-osx-app
       :bind (:map counsel-mode-map
-             ("s-<f6>" . counsel-osx-app)))))
+                  ("s-<f6>" . counsel-osx-app)))))
 
   ;; Display world clock using Ivy
   (use-package counsel-world-clock
     :bind (:map counsel-mode-map
-           ("C-c c k" . counsel-world-clock)))
+                ("C-c c k" . counsel-world-clock)))
 
   ;; Tramp ivy interface
   (use-package counsel-tramp
     :bind (:map counsel-mode-map
-           ("C-c c T" . counsel-tramp))))
+                ("C-c c T" . counsel-tramp))))
 
 ;; lsp supports
 (use-package lsp-ivy

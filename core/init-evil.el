@@ -87,6 +87,7 @@
    "s-e" '(:keymap nil :which-key "emacs")
    "s-e q" 'kill-emacs
    "s-e f" 'delete-frame
+   "s-e u" 'sevil-update-all
    "s-e s" 'save-buffer)
 
   ;; evil key maps
