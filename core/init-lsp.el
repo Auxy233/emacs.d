@@ -9,7 +9,7 @@
   :diminish
   :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
   :commands company-abort
-  :bind (("M-/" . my/company-complete)
+  :bind (("M-/" . company-complete-selection)
          ("<backtab>" . company-yasnippet)
          :map company-active-map
          ("C-p" . company-select-previous)
@@ -63,6 +63,7 @@
 
 (when (display-graphic-p)
   (use-package company-box
+    :diminish
     :hook (company-mode . company-box-mode)))
 
 ;; Popup documentation for completion candidates

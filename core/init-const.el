@@ -48,11 +48,6 @@
   :group 'sevil-setting
   :type '(boolean))
 
-(defcustom sevil-swap-parentheses-square-bracket t
-  "Swap () and []."
-  :group 'sevil-setting
-  :type '(boolean))
-
 ;; helper constants
 (defconst sys/linuxp
   (eq system-type 'gnu/linux)

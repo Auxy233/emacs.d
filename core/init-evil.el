@@ -14,8 +14,14 @@
   (evil-want-integration t)
   :config
 
+  (use-package evil-nerd-commenter)
+
+  (use-package evil-args)
+
+  (use-package evil-matchit)
+
   (use-package evil-magit
-    :after evil magit)
+    :after (evil magit))
 
   (use-package evil-surround
     :hook (evil-mode . global-evil-surround-mode))
@@ -28,67 +34,61 @@
     (evil-collection-calendar-want-org-bindings nil)
     (evil-collection-outline-bind-tab-p t)
     (evil-collection-setup-minibuffer t)
-    (evil-collection-setup-debugger-keys t)
-    ))
-
-;; I write lisp
-(when sevil-swap-parentheses-square-bracket
-  (progn
-    (keyboard-translate ?\( ?\[)
-    (keyboard-translate ?\[ ?\()
-    (keyboard-translate ?\) ?\])
-    (keyboard-translate ?\] ?\))))
+    (evil-collection-setup-debugger-keys t)))
 
 ;; start defining keybinding
 (use-package general
   :config
   ;; emacs key maps
   (general-define-key
-   "s-s" 'isearch-forward
+   "M-s" 'isearch-forward
 
-   "s-q" 'evil-force-normal-state
+   "M-q" 'evil-force-normal-state
 
    ;; applications
-   "s-a" '(:keymap nil :which-key "apps")
-   "s-a s-c" 'calendar
-   "s-a s-i" 'erc
-   "s-a s-s" 'shell-pop
-   "s-a s-r" 'recentf-open-files
+   "M-a" '(:keymap nil :which-key "apps")
+   "M-a c" 'calendar
+   "M-a i" 'erc
+   "M-a s" 'shell-pop
+   "M-a r" 'recentf-open-files
 
    ;; buffers
-   "s-b" '(:keymap nil :which-key "buffer")
-   "s-b s-b" 'ivy-switch-buffer
-   "s-b s-i" 'ibuffer
-   "s-b s-k" 'kill-this-buffer
-   "s-b s-n" 'next-buffer
-   "s-b s-p" 'previous-buffer
-   "s-b s-r" 'revert-buffer
+   "M-b" '(:keymap nil :which-key "buffer")
+   "M-b b" 'ivy-switch-buffer
+   "M-b i" 'ibuffer
+   "M-b k" 'kill-this-buffer
+   "M-b K" 'kill-matching-buffers
+   "M-b n" 'next-buffer
+   "M-b p" 'previous-buffer
+   "M-b r" 'revert-buffer
 
    ;; files
-   "s-f" '(:keymap nil :which-key "files")
-   "s-f f" 'find-file-other-window
-   "s-f j" 'dired-jump-other-window
-   "s-f s-d" 'delete-file
-   "s-f s-f" 'find-file
-   "s-f s-j" 'dired-jump
-   "s-f s-m" 'make-directory
-   "s-f s-r" 'rename-file
-   "s-f s-t" 'treemacs
-   "s-f s-a" 'treemacs-add-project
-   "s-f s-l" 'list-directory
+   "M-f" '(:keymap nil :which-key "files")
+   "M-f M-f" 'find-file-other-window
+   "M-f M-j" 'dired-jump-other-window
+   "M-f d" 'delete-file
+   "M-f f" 'find-file
+   "M-f j" 'dired-jump
+   "M-f m" 'make-directory
+   "M-f r" 'rename-file
+   "M-f t" 'treemacs
+   "M-f a" 'treemacs-add-project
+   "M-f l" 'list-directory
+   "M-f s" 'save-some-buffers
+   "M-f R" 'recentf-open-files
 
-   "s-l" 'lsp-command-map
+   "M-l" 'lsp-command-map
 
-   "s-p" 'projectile-command-map
+   "M-p" 'projectile-command-map
 
-   "s-w" 'persp-mode-map
+   "M-w" 'persp-mode-map
 
    ;; emacs management
-   "s-e" '(:keymap nil :which-key "emacs")
-   "s-e q" 'kill-emacs
-   "s-e f" 'delete-frame
-   "s-e u" 'sevil-update-all
-   "s-e s" 'save-buffer)
+   "M-e" '(:keymap nil :which-key "emacs")
+   "M-e q" 'kill-emacs
+   "M-e f" 'delete-frame
+   "M-e u" 'sevil-update-all
+   "M-e s" 'save-buffer)
 
   ;; evil key maps
   (general-define-key
@@ -105,6 +105,12 @@
    "gr" 'avy-resume
    "gp" 'avy-prev)
 
+  ;; I write lisp
+  (general-define-key
+   :state '(insert)
+   "s-[" 'paredit-open-round
+   "s-]" 'paredit-close-round)
+
   ;; less tired vim
   (when sevil-swap-colon
     (general-define-key
@@ -119,7 +125,7 @@
 
   (edit-leader-def
     ;; meta options
-    "SPC" 'counsel-M-x
+    "SPC" 'amx
     "TAB" 'next-buffer
 
     ;; flycheck
@@ -194,6 +200,18 @@
     "ho" 'hl-todo-occur
     "hi" 'hl-todo-insert
 
+    ;; movement
+    "m" '(:ignore t :which-key "move")
+    "ms" 'evil-inner-arg
+    "mS" 'evil-outer-arg
+    "ma" 'evil-backward-arg
+    "md" 'evil-forward-arg
+    "mw" 'evil-jump-out-args
+
+    ;; paredit
+    "p" 'enable-paredit-mode
+    "P" 'disable-paredit-mode
+
     ;; symbol overlays
     "s" '(:ignore t :which-key "symbol")
     "sp" 'symbol-overlay-put
@@ -203,12 +221,22 @@
     "sB" 'symbol-overlay-switch-backward
     "sr" 'symbol-overlay-remove-all
 
-    ;; tranpose
-    "t" '(:ignore t :which-key "transpose")
+    ;; transform
+    "t" '(:ignore t :which-key "transform")
+    ;;; align
     "ta" 'align
+    ;;; word transpose
     "tt" 'transpose-chars
     "tl" 'transpose-lines
     "tw" 'transpose-words
+    ;;; comment
+    "ti" 'evilnc-comment-or-uncomment-lines
+    "tc" 'evilnc-copy-and-comment-lines
+    "tp" 'evilnc-comment-or-uncomment-paragraphs
+    "tr" 'comment-or-uncomment-region
+    "tv" 'evilnc-toggle-invert-comment-line-by-line
+    "t."  'evilnc-copy-and-comment-operator
+    "t\\" 'evilnc-comment-operator ; if you prefer backslash key
 
     ;; url
     "u" '(:ignore t :which-key "url")

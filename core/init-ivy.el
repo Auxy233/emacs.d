@@ -18,12 +18,14 @@
          :map isearch-mode-map
          ("M-s" . swiper-isearch-toggle)
          :map counsel-mode-map
+         ([remap amx] . counsel-M-x)
          ([remap isearch-forward] . swiper-isearch)
          ([remap isearch-backward] . swiper-isearch-backward)
          ([remap swiper] . counsel-grep-or-swiper)
          ([remap swiper-backward] . counsel-grep-or-swiper-backward)
          ([remap dired] . counsel-dired)
          ([remap set-variable] . counsel-set-variable)
+         ([remap recentf-open-files] . counsel-recentf)
          ([remap insert-char] . counsel-unicode-char))
   :hook ((after-init . ivy-mode)
          (ivy-mode . counsel-mode))
