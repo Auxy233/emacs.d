@@ -77,8 +77,6 @@
    "M-f s" 'save-some-buffers
    "M-f R" 'recentf-open-files
 
-   "M-l" 'lsp-command-map
-
    "M-p" 'projectile-command-map
 
    "M-w" 'persp-mode-map

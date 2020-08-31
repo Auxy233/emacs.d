@@ -10,7 +10,7 @@
 
 (use-package slime
   :custom
-  (inferior-lisp-program "ros -Q run")
+  (inferior-lisp-program sevil-lisp-compiler)
   :init
   (setq slime-complete-symbol*-fancy t)
   (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)

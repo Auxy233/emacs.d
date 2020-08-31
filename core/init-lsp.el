@@ -61,11 +61,6 @@
   :hook ((company-mode . company-prescient-mode)
          (company-mode . prescient-persist-mode)))
 
-(when (display-graphic-p)
-  (use-package company-box
-    :diminish
-    :hook (company-mode . company-box-mode)))
-
 ;; Popup documentation for completion candidates
 (use-package company-quickhelp
   :defines company-quickhelp-delay
@@ -86,6 +81,7 @@
   (lsp-enable-indentation nil)
   (lsp-enable-links nil)
   (lsp-prefer-capf t)
+  (lsp-keymap-prefix "M-l")
   :init
   (when sevil-use-which-key
     (with-eval-after-load 'lsp-mode

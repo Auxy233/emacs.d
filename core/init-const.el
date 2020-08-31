@@ -48,6 +48,11 @@
   :group 'sevil-setting
   :type '(boolean))
 
+(defcustom sevil-lisp-compiler "sbcl"
+  "Define Lisp Implementation."
+  :group 'sevil-setting
+  :type '(string))
+
 ;; helper constants
 (defconst sys/linuxp
   (eq system-type 'gnu/linux)

@@ -17,8 +17,8 @@
   :init
   (setq gcmh-verbose             t
         gcmh-lows-cons-threshold #x800000
-        gcmh-high-cons-threshold most-positive-fixnum
-        gcmh-idle-delay          3600)
+        gcmh-high-cons-threshold #x6400000
+        gcmh-idle-delay          10)
   :config
   (gcmh-mode))
 

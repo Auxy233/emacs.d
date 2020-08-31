@@ -94,8 +94,8 @@
   :init
   (setq shell-pop-window-size 35
         shell-pop-shell-type
-        (cond (t '("eshell" "*eshell*" (lambda () (eshell))))
-              ((fboundp 'vterm) '("vterm" "*vterm*" (lambda () (vterm))))
+        (cond ((fboundp 'vterm) '("vterm" "*vterm*" (lambda () (vterm))))
+              (t '("eshell" "*eshell*" (lambda () (eshell))))
               (t '("terminal" "*terminal*" (lambda () (term shell-pop-term-shell)))))))
 
 (provide 'init-shell)
