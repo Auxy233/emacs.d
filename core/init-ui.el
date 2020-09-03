@@ -98,7 +98,7 @@
   (doom-themes-org-config))
 
 ;; HACK load it outside use-package due to some bugs
-(load-theme 'doom-dracula t)
+(load-theme 'doom-one-light t)
 
 ;; a minimum modeline, doom-modeline is too heavy
 (use-package mini-modeline

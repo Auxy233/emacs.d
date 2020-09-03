@@ -14,8 +14,6 @@
   (evil-want-integration t)
   :config
 
-  (use-package evil-nerd-commenter)
-
   (use-package evil-args)
 
   (use-package evil-matchit)
@@ -228,13 +226,9 @@
     "tl" 'transpose-lines
     "tw" 'transpose-words
     ;;; comment
-    "ti" 'evilnc-comment-or-uncomment-lines
-    "tc" 'evilnc-copy-and-comment-lines
-    "tp" 'evilnc-comment-or-uncomment-paragraphs
-    "tr" 'comment-or-uncomment-region
-    "tv" 'evilnc-toggle-invert-comment-line-by-line
-    "t."  'evilnc-copy-and-comment-operator
-    "t\\" 'evilnc-comment-operator ; if you prefer backslash key
+    "tc" 'comment-line
+    "tk" 'comment-kill
+    "ti" 'comment-indent
 
     ;; url
     "u" '(:ignore t :which-key "url")

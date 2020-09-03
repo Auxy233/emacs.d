@@ -35,13 +35,20 @@
                 avy-background t
                 avy-style 'pre))
 
+(use-package newcomment
+  :ensure nil
+  :straight nil
+  :custom
+  ;; `auto-fill' inside comments
+  (comment-auto-fill-only-comments t))
+
 ;; Pass a URL to a WWW browser
 (use-package browse-url
   :ensure nil
   :defines dired-mode-map)
 
 ;; Kill text between the point and the character CHAR
-(use-package avy-zap)
+(use-package avy-zap :after (zap))
 
 ;; Quickly follow links
 (use-package ace-link
