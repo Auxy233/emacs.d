@@ -12,7 +12,7 @@
  sevil-swap-colon t ; swap ; and : for evil
  sevil-lisp-compiler "sbcl"
  sevil-language-list ; the langauges you want to enable
- '(clisp coq cpp haskell idris latex ocaml python racket rust))
+ '(clisp coq cpp haskell idris latex ocaml python racket rust erlang))
 
 (provide 'custom.el)
 ;;; custom.el ends here

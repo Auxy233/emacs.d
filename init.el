@@ -97,4 +97,5 @@
 (sevil-load-lang rust)
 (sevil-load-lang haskell)
 (sevil-load-lang latex)
+(sevil-load-lang erlang)
 ;;; init.el ends here

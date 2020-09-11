@@ -43,13 +43,6 @@
 
    "M-q" 'evil-force-normal-state
 
-   ;; applications
-   "M-a" '(:keymap nil :which-key "apps")
-   "M-a c" 'calendar
-   "M-a i" 'erc
-   "M-a s" 'shell-pop
-   "M-a r" 'recentf-open-files
-
    ;; buffers
    "M-b" '(:keymap nil :which-key "buffer")
    "M-b b" 'ivy-switch-buffer
@@ -123,6 +116,13 @@
     ;; meta options
     "SPC" 'amx
     "TAB" 'next-buffer
+
+    ;; applications
+    "a" '(:keymap nil :which-key "apps")
+    "ac" 'calendar
+    "ai" 'erc
+    "as" 'shell-pop
+    "ar" 'recentf-open-files
 
     ;; flycheck
     "C" '(:ignore t :which-key "check")
