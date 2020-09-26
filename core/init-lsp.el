@@ -5,6 +5,8 @@
 ;;; Code:
 (require 'init-const)
 
+(use-package popup)
+
 (use-package company
   :diminish
   :defines (company-dabbrev-ignore-case company-dabbrev-downcase)
@@ -39,6 +41,7 @@
     (when (and (company-manual-begin)
                (= company-candidates-length 1))
       (company-complete-common)))
+  :init
   (setq
    company-tooltip-align-annotations t
    company-tooltip-limit 12
@@ -47,7 +50,7 @@
    company-minimum-prefix-length 3
    company-require-match nil
    company-dabbrev-ignore-case nil
-   company-show-numbers nil
+   company-show-numbers t
    company-dabbrev-downcase nil
    company-global-modes '(not
                           erc-mode message-mode help-mode
@@ -58,17 +61,13 @@
 
 ;; Better sorting and filtering
 (use-package company-prescient
-  :hook ((company-mode . company-prescient-mode)
-         (company-mode . prescient-persist-mode)))
+  :hook ((global-company-mode . company-prescient-mode)
+         (global-company-mode . prescient-persist-mode)))
 
-;; Popup documentation for completion candidates
 (use-package company-quickhelp
-  :defines company-quickhelp-delay
-  :custom
-  (pos-tip-use-relative-corrdinates t)
-  :bind (:map company-active-map
-              ([remap company-show-doc-buffer] . company-quickhelp-manual-begin))
-  :hook (global-company-mode . company-quickhelp-mode))
+  :after company
+  :hook (global-company-mode . company-quickhelp-mode)
+  :init (setq company-quickhelp-delay 0.5))
 
 (use-package lsp-mode
   :hook

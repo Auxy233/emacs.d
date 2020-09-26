@@ -39,12 +39,12 @@
     (exec-path-from-shell-initialize)))
 
 ;; start server
-(use-package server
-  :ensure nil
-  :defer 1
-  :config
-  (unless (server-running-p)
-    (server-start)))
+;; (use-package server
+;;   :ensure nil
+;;   :defer 1
+;;   :config
+;;   (unless (server-running-p)
+;;     (server-start)))
 
 ;; history
 (use-package saveplace

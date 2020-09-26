@@ -4,23 +4,25 @@
 
 ;;; Code:
 
-(use-package slime-company
+(use-package sly-asdf
   :defer t
-  :after (slime company))
+  :after (sly company))
 
-(use-package slime
+(use-package sly-quicklisp
+  :after sly)
+
+(use-package sly
   :custom
   (inferior-lisp-program sevil-lisp-compiler)
   :init
-  (setq slime-complete-symbol*-fancy t)
-  (setq slime-complete-symbol-function 'slime-fuzzy-complete-symbol)
-  (setq slime-contribs '(slime-fancy
-                         slime-indentation
-                         slime-autodoc
-                         slime-sbcl-exts
-                         slime-scratch))
+  (setq sly-complete-symbol*-fancy t)
+  (setq sly-contribs '(sly-fancy
+                         sly-indentation
+                         sly-autodoc
+                         sly-sbcl-exts
+                         sly-scratch))
   :config
-  (slime-setup '(slime-company slime-fancy slime-asdf slime-quicklisp)))
+  (sly-setup '(sly-fancy sly-asdf sly-quicklisp)))
 
 (use-package common-lisp-snippets
   :defer t

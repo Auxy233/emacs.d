@@ -8,11 +8,13 @@
   :mode "\\.rkt$"
   :hook ((racket-mode . rainbow-delimiters-mode))
   :bind (:map racket-mode-map
-         ("C-c C-s" . racket-check-syntax-mode)
-         (")" . racket-insert-closing)
-         ("]" . racket-insert-closing)
-         ("}" . racket-insert-closing)
-         ("C-M-\\" . racket-unicode-input-method-enable)))
+              ("C-c C-s" . racket-check-syntax-mode)
+              ("[" . paredit-open-round)
+              ("(" . paredit-open-bracket)
+              (")" . racket-insert-closing)
+              ("]" . racket-insert-closing)
+              ("}" . racket-insert-closing)
+              ("C-M-\\" . racket-unicode-input-method-enable)))
 
 (use-package scribble-mode
   :mode "\\.scrbl\\'"
