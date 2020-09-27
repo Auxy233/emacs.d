@@ -49,6 +49,9 @@
 ;; default directory
 (setq default-directory "~")
 
+;; no bell
+(setq ring-bell-function 'ignore)
+
 ;; better gui
 (push '(menu-bar-lines . 0) default-frame-alist) ;; remove mini menu
 (push '(tool-bar-lines . 0) default-frame-alist) ;; remove tool icon

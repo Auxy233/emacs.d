@@ -55,13 +55,17 @@
 (use-package recentf
   :ensure nil
   :hook (after-init . recentf-mode)
-  :init (setq recentf-max-saved-items 300
-              recentf-exclude
-              '("\\.?cache" ".cask" "url" "COMMIT_EDITMSG\\'" "bookmarks"
-                "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
-                "\\.?ido\\.last$" "\\.revive$" "/G?TAGS$" "/.elfeed/"
-                                        ;               "^/tmp/" "^/var/folders/.+$" ; "^/ssh:"
-                (lambda (file) (file-in-directory-p file package-user-dir))))
+  :custom
+  (recentf-max-saved-items 300)
+  (recentf-exclude
+   '("\\.?cache"
+     ".cask"
+     "url"
+     "COMMIT_EDITMSG\\'"
+     "bookmarks"
+     "\\.\\(?:gz\\|gif\\|svg\\|png\\|jpe?g\\|bmp\\|xpm\\)$"
+     "\\.?ido\\.last$" "\\.revive$" "/G?TAGS$" "/.elfeed/"
+     (lambda (file) (file-in-directory-p file package-user-dir))))
   :config (push (expand-file-name recentf-save-file) recentf-exclude))
 
 ;; session management
@@ -81,24 +85,36 @@
 (use-package simple
   :ensure nil
   :straight nil
-  :hook
-  ((after-init . (lambda ()
-                   (line-number-mode)
-                   (column-number-mode)
-                   (size-indication-mode)))
-   ((prog-mode markdown-mode conf-mode org-mode) . enable-trailing-whitespace))
-  :init
-  (setq ;; kill-whole-line t               ; Kill line including '\n'
-   line-move-visual nil
-   track-eol t                     ; Keep cursor at end of lines. Require line-move-visual is nil.
-   set-mark-command-repeat-pop t)  ; Repeating C-SPC after popping mark pops it again
+  :custom
+  ;; show line/column/filesize
+  (line-number-mode t)
+  (column-number-mode t)
+  (size-infication-mode t)
+  (visual-line-fringe-indicators '(nil right-curly-arrow))
+  ;; save clipoard text
+  (save-interprogram-paste-before-kill t)
+  ;; show character of the cursor postion
+  (what-cursor-show-names t)
+  ;; include newline
+  (kill-whole-line t))
 
-  ;; Visualize TAB, (HARD) SPACE, NEWLINE
-  (setq-default show-trailing-whitespace nil) ; Don't show trailing whitespace by default
-  (defun enable-trailing-whitespace ()
-    "Show trailing spaces and delete on saving."
-    (setq show-trailing-whitespace t)
-    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)))
+(use-package minibuffer
+  :ensure nil
+  :straight nil
+  :bind (:map minibuffer-local-map
+              ([escape] . abort-recursive-edit)
+              :map minibuffer-local-ns-map
+              ([escape] . abort-recursive-edit)
+              :map minibuffer-local-completion-map
+              ([escape] . abort-recursive-edit)
+              :map minibuffer-local-must-match-map
+              ([escape] . abort-recursive-edit)
+              :map minibuffer-local-isearch-map
+              ([escape] . abort-recursive-edit))
+  :custom
+  (minibuffer-depth-indicate-mode t)
+  (minibuffer-electric-default-mode t)
+  (enable-recursive-minibuffers t))
 
 (setq-default major-mode 'text-mode
               fill-column 80
@@ -116,6 +132,7 @@
       adaptive-fill-first-line-regexp "^* *$"
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
       sentence-end-double-space nil)
+
 
 (provide 'init-boot)
 ;;; init-boot.el ends here

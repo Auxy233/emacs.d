@@ -4,6 +4,18 @@
 ;; thiner but powerful enough
 
 ;;; Code:
+(use-package ivy
+  :config
+  ;; integrate yasnippet
+  (use-package ivy-yasnippet
+    :bind (([remap yas-visit-snippet-file] . ivy-yasnippet)))
+
+  ;; select from xref candidates with Ivy
+  (use-package ivy-xref
+    :init
+    (setq xref-show-definitions-function #'ivy-xref-show-defs)
+    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)))
+
 (use-package counsel
   :diminish ivy-mode counsel-mode
   :bind (("C-c v p" . ivy-push-view)
@@ -26,7 +38,8 @@
          ([remap dired] . counsel-dired)
          ([remap set-variable] . counsel-set-variable)
          ([remap recentf-open-files] . counsel-recentf)
-         ([remap insert-char] . counsel-unicode-char))
+         ([remap insert-char] . counsel-unicode-char)
+         ([remap command-history] . counsel-command-history))
   :hook ((after-init . ivy-mode)
          (ivy-mode . counsel-mode))
   :init
@@ -95,17 +108,6 @@ This is for use in `ivy-re-builders-alist'."
     :init
     (setq counsel-projectile-grep-initial-input '(ivy-thing-at-point))
     (counsel-projectile-mode 1))
-
-  ;; integrate yasnippet
-  (use-package ivy-yasnippet
-    :bind (([remap yas-visit-snippet-file] . ivy-yasnippet)))
-
-  ;; select from xref candidates with Ivy
-  (use-package ivy-xref
-    :init
-    (when (boundp 'xref-show-definitions-function)
-      (setq xref-show-definitions-function #'ivy-xref-show-defs))
-    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
 
   ;; correcting words with flyspell via Ivy
   (use-package flyspell-correct-ivy

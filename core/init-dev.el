@@ -42,13 +42,17 @@
 (use-package projectile
   :diminish
   :hook (after-init . projectile-mode)
-  :init
-  (setq projectile-mode-line-prefix ""
-        projectile-sort-order 'recentf
-        projectile-use-git-grep t)
+  :bind (:map projectile-command-map
+              ("." . projectile-ripgrep))
   :config
   (projectile-update-mode-line)         ; Update mode-line at the first time
-  (setq projectile-git-submodule-command nil))
+  :custom
+  (projectile-git-submodule-command nil)
+  (projectile-completion-system 'ivy)
+  (projectile-sort-order 'recentf)
+  (projectile-mode-line-prefix "")
+  (projectile-use-git-grep t)
+  (projectile-indexing-method 'alien))
 
 ;; use ripgrep to power up search speed
 (use-package ripgrep
@@ -58,40 +62,24 @@
 (use-package flycheck
   :diminish
   :hook (after-init . global-flycheck-mode)
+  :custom
+  (flycheck-emacs-lisp-load-path 'inherit)
+  (flycheck-check-syntax-automatically '(save mode-enabled))
+  (flycheck-indication-mode 'right-fringe)
+  (flycheck-temp-prefix ".flycheck")
   :config
-  (setq flycheck-emacs-lisp-load-path 'inherit)
-
-  ;; only check while saving and opening files
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
-
-  ;; set fringe style
-  (setq flycheck-indication-mode 'right-fringe)
-  (when (fboundp 'define-fringe-bitmap)
-    (define-fringe-bitmap 'flycheck-fringe-bitmap-double-arrow
-      [16 48 112 240 112 48 16] nil nil 'center))
-
   ;; display Flycheck errors in GUI tooltips
   (if (display-graphic-p)
-      (if emacs/>=26p
-          (use-package flycheck-posframe
-            :custom-face (flycheck-posframe-border-face ((t (:inherit default))))
-            :hook (flycheck-mode . flycheck-posframe-mode)
-            :init (setq flycheck-posframe-border-width 1
-                        flycheck-posframe-inhibit-functions
-                        '((lambda (&rest _) (bound-and-true-p company-backend)))))
-        (use-package flycheck-pos-tip
-          :defines flycheck-pos-tip-timeout
-          :hook (global-flycheck-mode . flycheck-pos-tip-mode)
-          :config (setq flycheck-pos-tip-timeout 30)))
+      (use-package flycheck-pos-tip
+        :defines flycheck-pos-tip-timeout
+        :hook (global-flycheck-mode . flycheck-pos-tip-mode)
+        :config (setq flycheck-pos-tip-timeout 30))
     (use-package flycheck-popup-tip
       :hook (flycheck-mode . flycheck-popup-tip-mode))))
 
 ;; docker
-(use-package docker
-  :defines docker-image-run-arguments
-  :config
-  (use-package docker-tramp :after (docker))
-  (use-package dockerfile-mode :after (docker)))
+(use-package docker :diminish)
+(use-package dockerfile-mode)
 
 (provide 'init-dev)
 ;;; init-dev.el ends here

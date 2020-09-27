@@ -146,23 +146,18 @@
     ;; counsel
     "c" '(:ignore t :which-key "counsel")
     "cB" 'counsel-bookmarked-directory
-    "cF" 'counsel-faces
     "cL" 'counsel-load-library
     "cO" 'counsel-find-file-extern
     "cP" 'counsel-package
     "ca" 'counsel-apropos
-    "ce" 'counsel-colors-emacs
     "cf" 'counsel-find-library
-    "ch" 'counsel-command-history
     "ci" 'counsel-git
     "cj" 'counsel-git-grep
     "cl" 'counsel-locate
-    "cm" 'counsel-imenu
     "cM" 'counsel-minibuffer-history
     "co" 'counsel-outline
     "cp" 'counsel-pt
     "cr" 'counsel-rg
-    "cs" 'ivy-resume
     "ct" 'counsel-load-theme
     "cu" 'counsel-unicode-char
     "cv" 'counsel-set-variable
@@ -170,9 +165,9 @@
     "cz" 'counsel-fzf
 
     ;; delete
-    "d" '(:ignore t :which-key "delete")
-    "dc" 'avy-zap-to-char-dwim
-    "dC" 'avy-zap-up-to-char-dwim
+    "d" '(:ignore t :which-key "dired")
+    "dj" 'dired-jump
+    "dJ" 'dired-jump-other-window
 
     ;; git
     "g" '(:ignore t :which-key "git")
@@ -208,6 +203,8 @@
     "p" 'enable-paredit-mode
     "P" 'disable-paredit-mode
 
+    "r" 'ivy-resume
+
     ;; symbol overlays
     "s" '(:ignore t :which-key "symbol")
     "sp" 'symbol-overlay-put
@@ -229,6 +226,9 @@
     "tc" 'comment-line
     "tk" 'comment-kill
     "ti" 'comment-indent
+    ;; delete char
+    "tz" 'avy-zap-to-char-dwim
+    "tZ" 'avy-zap-up-to-char-dwim
 
     ;; url
     "u" '(:ignore t :which-key "url")
@@ -250,6 +250,7 @@
     "xs" 'swiper
     "xc" 'quickrun
     "xd" 'docker
+    "xh" 'command-history
 
     ;; yasnippet
     "yy" 'yas-visit-snippet-file

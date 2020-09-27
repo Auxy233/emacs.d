@@ -7,42 +7,71 @@
 ;; ibuffer can manage them (like tab management)
 (use-package ibuffer
   :ensure nil
-  :functions my-ibuffer-find-file
-  :commands (ibuffer-find-file
-             ibuffer-current-buffer)
-  :init (setq ibuffer-filter-group-name-face '(:inherit (font-lock-string-face bold)))
+  :hook ((ibuffer-mode . ibuffer-auto-mode)
+         (ibuffer-mode . (lambda ()
+                           (ibuffer-switch-to-saved-filter-groups "Default"))))
   :config
-  ;; display buffer icons on GUI
-  (with-eval-after-load 'counsel
-    (defun my-ibuffer-find-file ()
-      (interactive)
-      (let ((default-directory (let ((buf (ibuffer-current-buffer)))
-                                 (if (buffer-live-p buf)
-                                     (with-current-buffer buf
-                                       default-directory)
-                                   default-directory))))
-        (counsel-find-file default-directory)))
-    (advice-add #'ibuffer-find-file :override #'my-ibuffer-find-file))
-
-  ;; group ibuffer's list by project root
   (use-package ibuffer-projectile
-    :functions ibuffer-do-sort-by-alphabetic
     :hook ((ibuffer . (lambda ()
                         (ibuffer-projectile-set-filter-groups)
                         (unless (eq ibuffer-sorting-mode 'alphabetic)
-                          (ibuffer-do-sort-by-alphabetic)))))))
+                          (ibuffer-do-sort-by-alphabetic))))))
+  :custom
+  (ibuffer-expert t)
+  (ibuffer-movement-cycle nil)
+  (ibuffer-show-empty-filter-groups nil)
+  (ibuffer-saved-filter-groups
+   '(("Default"
+      ("Emacs" (or (name . "\\*scratch\\*")
+                   (name . "\\*dashboard\\*")
+                   (name . "\\*compilation\\*")
+                   (name . "\\*Backtrace\\*")
+                   (name . "\\*Packages\\*")
+                   (name . "\\*Messages\\*")
+                   (name . "\\*Customize\\*")))
+      ("Prog" (derived-mode . prog-mode))
+      ("REPL" (or (mode . gnuplot-comint-mode)
+                  (mode . inferior-emacs-lisp-mode)
+                  (mode . inferior-python-mode)))
+      ("Text" (and (derived-mode . text-mode)
+                   (not (starred-name))))
+      ("Term" (or (mode . vterm-mode)
+                  (mode . term-mode)
+                  (mode . shell-mode)
+                  (mode . eshell-mode)))
+      ("Config" (or (mode . yaml-mode)
+                    (mode . conf-mode)))
+      ("Mail" (or (mode . message-mode)
+                  (mode . bbdb-mode)
+                  (mode . mail-mode)
+                  (mode . mu4e-compose-mode)))
+      ("Images" (or (mode . image-mode)
+                    (mode . image-dired-display-image-mode)
+                    (mode . image-dired-thumbnail-mode)))
+      ("Dired" (mode . dired-mode))
+      ("Magit" (name . "magit"))
+      ("IRC" (or (mode . rcirc-mode)
+                 (mode . erc-mode)))
+      ("EBrowse" (or (mode . ebrowse-tree-mode)
+                     (mode . ebrowse-member-mode)))
+      ("News" (or (name . "\\*newsticker\\*")
+                  (name . "\\*elpher\\*")))
+      ("Help" (or (name . "\\*Help\\*")
+                  (name . "\\*Apropos\\*")
+                  (name . "\\*info\\*")))))))
 
 ;; directory operations
 (use-package dired
   :ensure nil
   :straight nil
   :bind (:map dired-mode-map
-              ("C-c C-p" . wdired-change-to-wdired-mode))
+              ("C-c C-p" . wdired-change-to-wdired-mode)
+              ("C-c +" . dired-create-empty-file))
+  :custom
+  (dired-recursive-deletes 'always)
+  (dired-recursive-copies 'always)
+  (dired-auto-revert-buffer t)
   :config
-  ;; always delete and copy recursively
-  (setq dired-recursive-deletes 'always
-        dired-recursive-copies 'always)
-
   (when sys/macp
     ;; suppress the warning: `ls does not support --dired'.
     (setq dired-use-ls-dired nil))
