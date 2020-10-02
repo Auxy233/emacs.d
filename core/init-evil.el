@@ -213,6 +213,9 @@
     "sF" 'symbol-overlay-switch-forward
     "sB" 'symbol-overlay-switch-backward
     "sr" 'symbol-overlay-remove-all
+    "sl" 'sort-lines
+    "sc" 'sort-columns
+    "sg" 'sort-paragraphs
 
     ;; transform
     "t" '(:ignore t :which-key "transform")
