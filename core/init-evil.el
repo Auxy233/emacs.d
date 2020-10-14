@@ -40,6 +40,7 @@
   ;; emacs key maps
   (general-define-key
    "M-s" 'isearch-forward
+   "C-s" 'counsel-rg
 
    "M-q" 'evil-force-normal-state
 
@@ -70,7 +71,7 @@
 
    "M-p" 'projectile-command-map
 
-   "M-w" 'persp-mode-map
+   "m-w" 'persp-mode-map
 
    ;; emacs management
    "M-e" '(:keymap nil :which-key "emacs")
@@ -117,6 +118,11 @@
     "SPC" 'amx
     "TAB" 'next-buffer
 
+    ;; toggle
+    "!" '(:keymap nil :which-key "toggle")
+    "!c" 'company-mode
+    "!s" 'auto-save-mode
+
     ;; applications
     "a" '(:keymap nil :which-key "apps")
     "ac" 'calendar
@@ -143,26 +149,13 @@
     "Cv" 'flycheck-verify-setup
     "Cd" 'flycheck-disable-checker
 
-    ;; counsel
-    "c" '(:ignore t :which-key "counsel")
-    "cB" 'counsel-bookmarked-directory
-    "cL" 'counsel-load-library
-    "cO" 'counsel-find-file-extern
-    "cP" 'counsel-package
-    "ca" 'counsel-apropos
-    "cf" 'counsel-find-library
-    "ci" 'counsel-git
-    "cj" 'counsel-git-grep
-    "cl" 'counsel-locate
-    "cM" 'counsel-minibuffer-history
-    "co" 'counsel-outline
-    "cp" 'counsel-pt
-    "cr" 'counsel-rg
-    "ct" 'counsel-load-theme
-    "cu" 'counsel-unicode-char
-    "cv" 'counsel-set-variable
-    "cw" 'counsel-colors-web
-    "cz" 'counsel-fzf
+    ;; compile
+    "c" '(:ignore t :which-key "compile")
+    "cc" 'compile
+    "cC" 'recompile
+    "cK" 'kill-compilation
+    "cx" 'quickrun
+    "cX" 'quickrun-shell
 
     ;; delete
     "d" '(:ignore t :which-key "dired")
@@ -198,6 +191,9 @@
     "ma" 'evil-backward-arg
     "md" 'evil-forward-arg
     "mw" 'evil-jump-out-args
+    ;; menu
+    "mi" 'imenu
+    "mo" 'counsel-outline
 
     ;; paredit
     "p" 'enable-paredit-mode
@@ -250,8 +246,6 @@
     "xj" 'evil-show-jumps
     "xm" 'evil-show-marks
     "xr" 'counsel-rg
-    "xs" 'swiper
-    "xc" 'quickrun
     "xd" 'docker
     "xh" 'command-history
 

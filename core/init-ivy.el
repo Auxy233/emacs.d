@@ -20,6 +20,7 @@
   :diminish ivy-mode counsel-mode
   :bind (("C-c v p" . ivy-push-view)
          ("C-c v o" . ivy-pop-view)
+         ("M-*" . ivy-immediate-done)
          :map ivy-minibuffer-map
          ("C-w" . ivy-yank-word)
          :map counsel-find-file-map
