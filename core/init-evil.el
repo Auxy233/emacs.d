@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;; use `evil' for editing and manipulate buffers
 ;; use `ctrl' to invoke hydra
-;; use `s-' to invke Emacs style KB for editor management
+;; use `M-' to invke Emacs style KB for editor management
 
 ;;; Code:
 (require 'init-const)
@@ -70,8 +70,6 @@
    "M-f R" 'recentf-open-files
 
    "M-p" 'projectile-command-map
-
-   "m-w" 'persp-mode-map
 
    ;; emacs management
    "M-e" '(:keymap nil :which-key "emacs")
