@@ -9,7 +9,7 @@
  sevil-font-size "13" ; font size
  sevil-use-linum t ; show line number in side bar
  sevil-use-which-key t ; show key hints
- sevil-swap-colon t ; swap ; and : for evil
+ sevil-use-evil nil ; use evil
  sevil-lisp-compiler "sbcl"
  sevil-language-list ; the langauges you want to enable
  '(clisp coq cpp haskell idris latex ocaml python racket rust erlang))

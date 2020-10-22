@@ -7,256 +7,172 @@
 ;;; Code:
 (require 'init-const)
 
-(use-package evil
-  :hook (after-init . evil-mode)
-  :custom
-  (evil-want-keybinding nil)
-  (evil-want-integration t)
-  :config
-
-  (use-package evil-args)
-
-  (use-package evil-matchit)
-
-  (use-package evil-magit
-    :after (evil magit))
-
-  (use-package evil-surround
-    :hook (evil-mode . global-evil-surround-mode))
-
-  ;; some modes are not natively supported by evil
-  (use-package evil-collection
-    :hook (evil-mode . evil-collection-init)
+(when sevil-use-evil
+  (use-package evil
+    :hook (after-init . evil-mode)
     :custom
-    (evil-collection-company-setup t)
-    (evil-collection-calendar-want-org-bindings nil)
-    (evil-collection-outline-bind-tab-p t)
-    (evil-collection-setup-minibuffer t)
-    (evil-collection-setup-debugger-keys t)))
+    (evil-want-keybinding nil)
+    (evil-want-integration t)
+    :config
 
-;; start defining keybinding
-(use-package general
-  :config
-  ;; emacs key maps
-  (general-define-key
-   "M-s" 'isearch-forward
-   "C-s" 'counsel-rg
+    (use-package evil-args)
 
-   "M-q" 'evil-force-normal-state
+    (use-package evil-matchit)
 
-   ;; buffers
-   "M-b" '(:keymap nil :which-key "buffer")
-   "M-b b" 'ivy-switch-buffer
-   "M-b i" 'ibuffer
-   "M-b k" 'kill-this-buffer
-   "M-b K" 'kill-matching-buffers
-   "M-b n" 'next-buffer
-   "M-b p" 'previous-buffer
-   "M-b r" 'revert-buffer
+    (use-package evil-magit
+      :after (evil magit))
 
-   ;; files
-   "M-f" '(:keymap nil :which-key "files")
-   "M-f M-f" 'find-file-other-window
-   "M-f M-j" 'dired-jump-other-window
-   "M-f d" 'delete-file
-   "M-f f" 'find-file
-   "M-f j" 'dired-jump
-   "M-f m" 'make-directory
-   "M-f r" 'rename-file
-   "M-f t" 'treemacs
-   "M-f a" 'treemacs-add-project
-   "M-f l" 'list-directory
-   "M-f s" 'save-some-buffers
-   "M-f R" 'recentf-open-files
+    (use-package evil-surround
+      :hook (evil-mode . global-evil-surround-mode))
 
-   "M-p" 'projectile-command-map
+    ;; some modes are not natively supported by evil
+    (use-package evil-collection
+      :hook (evil-mode . evil-collection-init)
+      :custom
+      (evil-collection-company-setup t)
+      (evil-collection-calendar-want-org-bindings nil)
+      (evil-collection-outline-bind-tab-p t)
+      (evil-collection-setup-minibuffer t)
+      (evil-collection-setup-debugger-keys t))
 
-   ;; emacs management
-   "M-e" '(:keymap nil :which-key "emacs")
-   "M-e q" 'kill-emacs
-   "M-e f" 'delete-frame
-   "M-e u" 'sevil-update-all
-   "M-e s" 'save-buffer)
-
-  ;; evil key maps
-  (general-define-key
-   :states '(normal visual)
-   "C-r" 'undo-fu-only-redo
-   "u" 'undo-fu-only-undo
-
-   ;; avy jump
-   "gc" 'evil-avy-goto-char-timer
-   "go" 'evil-avy-goto-word-or-subword-1
-   "gi" 'evil-avy-goto-line
-   "gl" 'goto-line
-   "gw" 'evil-avy-goto-word-1
-   "gr" 'avy-resume
-   "gp" 'avy-prev)
-
-  ;; I write lisp
-  (general-define-key
-   :state '(insert)
-   "s-[" 'paredit-open-round
-   "s-]" 'paredit-close-round)
-
-  ;; less tired vim
-  (when sevil-swap-colon
+    ;; evil key maps
     (general-define-key
      :states '(normal visual)
-     ";" 'evil-ex
-     ":" 'evil-repeat-find-char))
+     "C-r" 'undo-fu-only-redo
+     "u" 'undo-fu-only-undo
 
-  ;; the comma leader key serves for emacs managemnt
-  (general-create-definer edit-leader-def
-    :prefix "SPC"
-    :states '(normal visual emacs))
+     ;; avy jump
+     "gc" 'evil-avy-goto-char-timer
+     "go" 'evil-avy-goto-word-or-subword-1
+     "gi" 'evil-avy-goto-line
+     "gl" 'goto-line
+     "gw" 'evil-avy-goto-word-1
+     "gr" 'avy-resume
+     "gp" 'avy-prev)
 
-  (edit-leader-def
-    ;; meta options
-    "SPC" 'amx
-    "TAB" 'next-buffer
+    ;; I write lisp
+    (general-define-key
+     :state '(insert)
+     "s-[" 'paredit-open-round
+     "s-]" 'paredit-close-round)
 
-    ;; toggle
-    "!" '(:keymap nil :which-key "toggle")
-    "!c" 'company-mode
-    "!s" 'auto-save-mode
+    ;; the comma leader key serves for emacs managemnt
+    (general-create-definer edit-leader-def
+      :prefix "SPC"
+      :states '(normal visual emacs))
 
-    ;; applications
-    "a" '(:keymap nil :which-key "apps")
-    "ac" 'calendar
-    "ai" 'erc
-    "as" 'shell-pop
-    "ar" 'recentf-open-files
+    (edit-leader-def
+      ;; meta options
+      "SPC" 'amx
+      "TAB" 'next-buffer
 
-    ;; flycheck
-    "C" '(:ignore t :which-key "check")
-    "Cc" 'flycheck-buffer
-    "CC" 'flycheck-clear
-    "Cx" 'flycheck-compile
-    "Cn" 'flycheck-next-error
-    "Cp" 'flycheck-previous-error
-    "Cl" 'flycheck-list-errors
-    "Cw" 'flycheck-copy-errors-as-kill
-    "Cs" 'flycheck-select-checker
-    "C?" 'flycheck-describe-checker
-    "Ch" 'flycheck-display-error-at-point
-    "Ce" 'flycheck-explain-error-at-point
-    "CH" 'display-local-help
-    "Ci" 'flycheck-manual
-    "CV" 'flycheck-version
-    "Cv" 'flycheck-verify-setup
-    "Cd" 'flycheck-disable-checker
+      ;; toggle
+      "!" '(:keymap nil :which-key "toggle")
+      "!c" 'company-mode
+      "!s" 'auto-save-mode
 
-    ;; compile
-    "c" '(:ignore t :which-key "compile")
-    "cc" 'compile
-    "cC" 'recompile
-    "cK" 'kill-compilation
-    "cx" 'quickrun
-    "cX" 'quickrun-shell
+      ;; applications
+      "a" '(:keymap nil :which-key "apps")
+      "ac" 'calendar
+      "ai" 'erc
+      "as" 'shell-pop
+      "ar" 'recentf-open-files
 
-    ;; delete
-    "d" '(:ignore t :which-key "dired")
-    "dj" 'dired-jump
-    "dJ" 'dired-jump-other-window
+      ;; compile
+      "c" '(:ignore t :which-key "compile")
+      "cc" 'compile
+      "cC" 'recompile
+      "cK" 'kill-compilation
+      "cx" 'quickrun
+      "cX" 'quickrun-shell
 
-    ;; git
-    "g" '(:ignore t :which-key "git")
-    "gB" 'magit-blame-addition
-    "gC" 'magit-commit-create
-    "gD" 'magit-dispatch
-    "gG" 'magit-status-here
-    "gb" 'magit-branch-checkout
-    "gc" 'magit-branch-and-checkout
-    "gd" 'magit-diff
-    "gf" 'magit-find-file
-    "gg" 'magit-status
-    "gi" 'magit-init
-    "gp" 'magit-file-popup
-    "gr" 'magit-rebase-interactive
+      ;; delete
+      "d" '(:ignore t :which-key "dired")
+      "dj" 'dired-jump
+      "dJ" 'dired-jump-other-window
 
-    ;; hl-todo
-    "h" '(:ignore t :which-key "hltodo")
-    "hb" 'hl-todo-previous
-    "hf" 'hl-todo-next
-    "ho" 'hl-todo-occur
-    "hi" 'hl-todo-insert
+      ;; git
+      "g" '(:ignore t :which-key "git")
+      "gB" 'magit-blame-addition
+      "gC" 'magit-commit-create
+      "gD" 'magit-dispatch
+      "gG" 'magit-status-here
+      "gb" 'magit-branch-checkout
+      "gc" 'magit-branch-and-checkout
+      "gd" 'magit-diff
+      "gf" 'magit-find-file
+      "gg" 'magit-status
+      "gi" 'magit-init
+      "gp" 'magit-file-popup
+      "gr" 'magit-rebase-interactive
 
-    ;; movement
-    "m" '(:ignore t :which-key "move")
-    "ms" 'evil-inner-arg
-    "mS" 'evil-outer-arg
-    "ma" 'evil-backward-arg
-    "md" 'evil-forward-arg
-    "mw" 'evil-jump-out-args
-    ;; menu
-    "mi" 'imenu
-    "mo" 'counsel-outline
+      ;; hl-todo
+      "h" '(:ignore t :which-key "hltodo")
+      "hb" 'hl-todo-previous
+      "hf" 'hl-todo-next
+      "ho" 'hl-todo-occur
+      "hi" 'hl-todo-insert
 
-    ;; paredit
-    "p" 'enable-paredit-mode
-    "P" 'disable-paredit-mode
+      ;; movement
+      "m" '(:ignore t :which-key "move")
+      "ms" 'evil-inner-arg
+      "mS" 'evil-outer-arg
+      "ma" 'evil-backward-arg
+      "md" 'evil-forward-arg
+      "mw" 'evil-jump-out-args
+      ;; menu
+      "mi" 'imenu
+      "mo" 'counsel-outline
 
-    "r" 'ivy-resume
+      ;; paredit
+      "p" 'enable-paredit-mode
+      "P" 'disable-paredit-mode
 
-    ;; symbol overlays
-    "s" '(:ignore t :which-key "symbol")
-    "sp" 'symbol-overlay-put
-    "sf" 'symbol-overlay-jump-next
-    "sb" 'symbol-overlay-jump-prev
-    "sF" 'symbol-overlay-switch-forward
-    "sB" 'symbol-overlay-switch-backward
-    "sr" 'symbol-overlay-remove-all
-    "sl" 'sort-lines
-    "sc" 'sort-columns
-    "sg" 'sort-paragraphs
+      "r" 'ivy-resume
 
-    ;; transform
-    "t" '(:ignore t :which-key "transform")
-    ;;; align
-    "ta" 'align
-    ;;; word transpose
-    "tt" 'transpose-chars
-    "tl" 'transpose-lines
-    "tw" 'transpose-words
-    ;;; comment
-    "tc" 'comment-line
-    "tk" 'comment-kill
-    "ti" 'comment-indent
-    ;; delete char
-    "tz" 'avy-zap-to-char-dwim
-    "tZ" 'avy-zap-up-to-char-dwim
+      ;; symbol overlays
+      "s" '(:ignore t :which-key "symbol")
+      "sp" 'symbol-overlay-put
+      "sf" 'symbol-overlay-jump-next
+      "sb" 'symbol-overlay-jump-prev
+      "sF" 'symbol-overlay-switch-forward
+      "sB" 'symbol-overlay-switch-backward
+      "sr" 'symbol-overlay-remove-all
+      "sl" 'sort-lines
+      "sc" 'sort-columns
+      "sg" 'sort-paragraphs
 
-    ;; url
-    "u" '(:ignore t :which-key "url")
-    "u." 'browse-url-at-point
-    "ub" 'browse-url-of-buffer
-    "ur" 'browse-url-of-region
-    "uu" 'browse-url
-    "ue" 'browse-url-emacs
-    "uv" 'browse-url-of-file
+      ;; transform
+      "t" '(:ignore t :which-key "transform")
+    ;; align
+      "ta" 'align
+      ;; delete char
+      "tz" 'avy-zap-to-char-dwim
+      "tZ" 'avy-zap-up-to-char-dwim
 
-    ;; misc
-    "x" '(:ignore t :which-key "misc")
-    "xa" 'swiper-all
-    "xb" 'dap-debug
-    "xi" 'imenu
-    "xj" 'evil-show-jumps
-    "xm" 'evil-show-marks
-    "xr" 'counsel-rg
-    "xd" 'docker
-    "xh" 'command-history
+      ;; url
+      "u" '(:ignore t :which-key "url")
+      "u." 'browse-url-at-point
+      "ub" 'browse-url-of-buffer
+      "ur" 'browse-url-of-region
+      "uu" 'browse-url
+      "ue" 'browse-url-emacs
+      "uv" 'browse-url-of-file
 
-    ;; yasnippet
-    "yy" 'yas-visit-snippet-file
-    "yc" 'yas--snippet-create
+      ;; misc
+      "x" '(:ignore t :which-key "misc")
+      "xa" 'swiper-all
+      "xb" 'dap-debug
+      "xi" 'imenu
+      "xj" 'evil-show-jumps
+      "xm" 'evil-show-marks
+      "xr" 'counsel-rg
+      "xd" 'docker
+      "xh" 'command-history
 
-    ;; windows
-    "w" '(:keymap evil-window-map :which-key "window")
-    "w-" 'split-window-vertically
-    "w/" 'split-window-horizontally
-    "wr" 'winner-redo
-    "wu" 'winner-undo))
+      ;; yasnippet
+      "yy" 'yas-visit-snippet-file
+      "yc" 'yas--snippet-create)))
 
 ;; Tips for next keystroke
 (when sevil-use-which-key
