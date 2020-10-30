@@ -80,7 +80,7 @@
   (lsp-enable-indentation nil)
   (lsp-enable-links nil)
   (lsp-prefer-capf t)
-  (lsp-keymap-prefix "M-l")
+  (lsp-keymap-prefix "C-c l")
   :init
   (when sevil-use-which-key
     (with-eval-after-load 'lsp-mode

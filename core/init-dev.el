@@ -14,10 +14,14 @@
 ;; quickrun codes
 (use-package quickrun
   :defer 1
+  :bind (("C-c x" . quickrun))
   :custom (quickrun-focus-p nil))
 
 ;; use magit for git VC
 (use-package magit
+   :bind (("C-x g" . magit-status)
+          ("C-x M-g" . magit-dispatch)
+          ("C-c M-g" . magit-file-popup))
   :mode (("\\COMMIT_EDITMSG\\'" . text-mode)
          ("\\MERGE_MSG\\'" . text-mode))
   :config
@@ -42,6 +46,7 @@
 (use-package projectile
   :diminish
   :hook (after-init . projectile-mode)
+  :bind-keymap ("C-c p" . projectile-command-map)
   :bind (:map projectile-command-map
               ("." . projectile-ripgrep))
   :config

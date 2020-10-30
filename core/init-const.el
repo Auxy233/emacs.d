@@ -23,6 +23,11 @@
   :group 'sevil-setting
   :type '(boolean))
 
+(defcustom sevil-use-evil nil
+  "Use evil by default"
+  :group 'sevil-setting
+  :type '(boolean))
+
 (defcustom sevil-use-which-key t
   "Show key hints."
   :group 'sevil-setting

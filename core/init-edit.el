@@ -29,6 +29,12 @@
 
 ;; Jump to things in Emacs tree-style
 (use-package avy
+  :bind (("C-:" . avy-goto-char)
+         ("C-'" . avy-goto-char-2)
+         ("C-c C-j" . avy-resume)
+         ("M-g f" . avy-goto-line)
+         ("M-g w" . avy-goto-word-1)
+         ("M-g e" . avy-goto-word-0))
   :hook (after-init . avy-setup-default)
   :config (setq avy-all-windows t
                 avy-all-windows-alt t
@@ -123,6 +129,10 @@
   :diminish
   :hook ((prog-mode . subword-mode)
          (minibuffer-setup . subword-mode)))
+
+(use-package multiple-cursors
+  :config
+  (global-set-key (kbd "C-x C-m") 'mc/edit-lines))
 
 ;; Hideshow
 (use-package hideshow
