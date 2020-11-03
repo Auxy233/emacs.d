@@ -108,6 +108,7 @@
 
 ;; Framework for mode-specific buffer indexes
 (use-package imenu
+  :bind (("C-." . imenu))
   :ensure nil)
 
 ;; Undo/Redo
@@ -131,9 +132,13 @@
          (minibuffer-setup . subword-mode)))
 
 (use-package multiple-cursors
-  :config
-  (global-set-key (kbd "C-x C-m") 'mc/edit-lines))
-
+  :bind (("C-<" . mc/mark-previous-like-this)
+         ("C->" . mc/mark-next-like-this)
+         ("C-c m h" . mc/mark-all-like-this)
+         ("C-c m c" . mc/edit-lines)
+         ("C-c m e" . mc/edit-ends-of-lines)
+         ("C-c m a" . mc/edit-beginnings-of-lines)))
+  
 ;; Hideshow
 (use-package hideshow
   :ensure nil

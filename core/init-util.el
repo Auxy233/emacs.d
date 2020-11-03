@@ -7,7 +7,7 @@
 ;; ibuffer can manage them (like tab management)
 (use-package ibuffer
   :ensure nil
-  :bind ("C-." . ibuffer)
+  :bind ("C-x C-b" . ibuffer)
   :hook ((ibuffer-mode . ibuffer-auto-mode)
          (ibuffer-mode . (lambda ()
                            (ibuffer-switch-to-saved-filter-groups "Default"))))
