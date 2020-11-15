@@ -63,7 +63,6 @@
 (setq initial-scratch-message
       (concat
        ";; Project from https://github.com/GaloisNeko/.emacs.d by GaloisNeko.\n"
-       ";; Use `C-h b' to see all keybindings or `SPC ?' for Evil keys.\n"
-       ";; Or customize in `custom.el`.\n\n"))
+       ";; Customize config in `custom.el`.\n\n"))
 
 ;;; early-init ends here

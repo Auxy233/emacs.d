@@ -196,18 +196,15 @@
     "Recenter and pulse the current line."
     (recenter)
     (pulse-line))
-  :init
-  ;; better evil notification
-  (advice-add #'evil-goto-line       :after #'recenter-and-pulse)
-  (advice-add #'evil-goto-mark-line  :after #'recenter-and-pulse)
-  (advice-add #'what-cursor-position :after #'pulse-line)
-  (advice-add #'evil-window-top      :after #'pulse-line)
-  (advice-add #'evil-window-middle   :after #'pulse-line)
-  (advice-add #'evil-window-bottom   :after #'pulse-line)
   :hook ((counsel-grep-post-action
           dumb-jump-after-jump
           bookmark-after-jump
-          imenu-after-jump) . recenter-and-pulse)
+          imenu-after-jump
+          goto-line-preview
+          goto-char-preview
+          pop-to-mark-command
+          pop-global-mark
+          goto-last-change) . recenter-and-pulse)
   :custom-face
   (pulse-highlight-start-face ((t (:inherit highlight))))
   (pulse-highlight-face ((t (:inherit highlight)))))
