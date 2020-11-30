@@ -98,4 +98,5 @@
 (sevil-load-lang haskell)
 (sevil-load-lang latex)
 (sevil-load-lang erlang)
+(sevil-load-lang cogent)
 ;;; init.el ends here

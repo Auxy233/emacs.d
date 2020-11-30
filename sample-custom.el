@@ -12,7 +12,7 @@
  sevil-use-evil nil ; use evil
  sevil-lisp-compiler "sbcl"
  sevil-language-list ; the langauges you want to enable
- '(clisp coq cpp haskell idris latex ocaml python racket rust erlang))
+ '(clisp coq cpp haskell idris latex ocaml python racket rust erlang cogent))
 
 (provide 'custom.el)
 ;;; custom.el ends here
