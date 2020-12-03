@@ -62,7 +62,7 @@
 ;; add scratch message
 (setq initial-scratch-message
       (concat
-       ";; Project from https://github.com/GaloisNeko/.emacs.d by GaloisNeko.\n"
+       ";; Make Emacs Even Greater.\n"
        ";; Customize config in `custom.el`.\n\n"))
 
 ;;; early-init ends here

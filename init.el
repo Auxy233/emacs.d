@@ -88,7 +88,7 @@
 
 ;;; programming languages environment
 (sevil-load-lang cpp)
-(sevil-load-lang python)
+(sevil-load-lang agda)
 (sevil-load-lang coq)
 (sevil-load-lang ocaml)
 (sevil-load-lang racket)

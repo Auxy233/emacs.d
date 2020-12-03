@@ -1,7 +1,7 @@
 * Overview
 
   =Sevil= is my evil Emacs config - a light weight Emacs with modern editor
-  features (e.g. vim's keybinding).
+  features.
 
 ** Structure
 
@@ -25,56 +25,13 @@
    + =lang=: programming language settings
      + ...
 
-   Some notable plugins:
-
-   + /straight/: a package manager which downloads from git directly; compare to
-     /package.el/, I don't want to spend time on push plugins to Melpa
-   + /use-package/: a macro allows us to write config elegantly
-   + /lsp-mode/: LSP client for Emacs; save your life from different language configurations
-   + /ivy/: a lightweight fuzzy matching
-   + /evil/: use Vim keybindings in Emacs (for detailed key bindings, please
-     visit =core/init-evil.el=)
-   + ...
-
-** Programming Language
-
-   Currently, it supports following programming language with
-   dependencies (most through LSP):
-
-   |-------------+------------------+--------------|
-   | Language    | Backend          | Abbreviation |
-   |-------------+------------------+--------------|
-   | C/C++       | clangd           | cpp          |
-   | OCaml       | ocaml-lsp-server | ocaml        |
-   | Python      | pyls             | python       |
-   | Common Lisp | slime            | clisp        |
-   | Racket      | Dr.Raclet        | racket       |
-   | Idris       | idris            | idris        |
-   | Rust        | rust-analyzer    | rust         |
-   | Coq         | coq              | coq          |
-   | Haskell     | HLS              | haskell      |
-   | Latex       | latex            | latex        |
-   |-------------+------------------+--------------|
-
 ** Key Bindings
 
-   The detailed keybindings are in =core/init-evil=. Sweet Devil use a mixed keybindings
-   of Evil style and Emacs style after a long time of pure Evil style KB due to
-   the compatibility issues of some Emacs major mode. The Evil leader key is
-   /SPC/. And I use /s-/ extensively for Emacs style KB to avoid overuse of
-   little fingers. /C-/ style KB is usually linked with Hydra.
-
-   You can use =SPC ?= to view Evil KB or =C-h b= to view all KB.
+   By default, it's in Emacs style keybinding. But of course you can enable
+   vim support in =custom.el=. The detailed KB could be searched by pressing
+   =M-x=.
 
 ** Customization
 
    You can customize the config through =custom.el=, which will be generated
-   after first initialization. We have options:
-   + =sevil-font-name=: The font name you want to use, should be a string
-   + =sevil-font-size=: The size of the font in integer
-   + =sevil-use-linum=: Use linum plugin with show line numbers
-   + =sevil-use-which-key=: Use which-key to show possible hot keys
-   + =sevil-language-list=: Enable corresponding languages in the list by their
-     abbreviations (listed above)
-   + =sevil-swap-colon=: swap =;= and =:= for evil
-   + =sevil-swap-parentheses-square-bracket=: swap =()= and =[]= keys
+   after first initialization.
