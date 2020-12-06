@@ -3,7 +3,7 @@
 ;; require `Dr.Racket'
 
 ;;; Code:
-
+;; Racket
 (use-package racket-mode
   :mode "\\.rkt$"
   :hook ((racket-mode . rainbow-delimiters-mode))
@@ -23,6 +23,9 @@
 (use-package pollen-mode
   :mode "\\.\\(p\\|pp\\|pm\\|pmd\\|poly\\|ptree\\)\\'"
   :requires company-pollen)
+
+;; Scheme
+(use-package geiser)
 
 (provide 'init-racket)
 ;;; init-racket ends here
