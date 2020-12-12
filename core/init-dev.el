@@ -26,11 +26,8 @@
          ("\\MERGE_MSG\\'" . text-mode))
   :config
   ;; access git forges from magit
-  (use-package forge)
-
-  ;; show TODOs in magit
-  (use-package magit-todos
-    :hook (magit-status-mode . magit-todos-mode)))
+  (when (executable-find "sqlite")
+        (use-package forge)))
 
 ;; walk through git revisions of a file
 (use-package git-timemachine

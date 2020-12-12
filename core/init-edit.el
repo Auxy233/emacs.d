@@ -154,7 +154,7 @@
   :hook (after-init . yas-global-mode)
   :config (use-package yasnippet-snippets))
 
-(use-package paredit)
+;;(use-package paredit)
 
 (provide 'init-edit)
 ;;; init-edit.el ends here
