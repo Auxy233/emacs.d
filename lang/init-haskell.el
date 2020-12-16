@@ -27,6 +27,7 @@
                '(haskell-left-arrows
                  (regexp . "\\(\\s-+\\)\\(<-\\|←\\)\\s-+")
                  (modes quote (haskell-mode literate-haskell-mode))))
+
   :bind (:map haskell-mode-map
          ("C-c h"   . hoogle)
          ("C-o"     . open-line)
@@ -39,7 +40,6 @@
   (haskell-compile-command "ghc -dynamic -Wall -ferror-spans -fforce-recomp -c %s")
   (haskell-process-suggest-haskell-docs-imports t)
   (haskell-process-suggest-remove-import-lines  t)
-  (haskell-process-log                          t)
   (haskell-process-suggest-hoogle-imports       t)
   (haskell-tags-on-save                         t)
   (inhibit-startup-screen                       t))
