@@ -14,7 +14,8 @@
 (use-package proof-general
   :mode ("\\.v$" . coq-mode)
   :custom
-  (proof-splash-enable nil))
+  (proof-splash-enable nil)
+  (coq-project-filename "_CoqProject"))
 
 (use-package company-coq
   :after proof-general
