@@ -1,8 +1,5 @@
 * Overview
 
-  =Sevil= is my evil Emacs config - a light weight Emacs with modern editor
-  features.
-
 ** Structure
 
    Group by folders and files:

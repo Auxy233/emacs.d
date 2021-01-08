@@ -41,6 +41,31 @@
                 avy-background t
                 avy-style 'pre))
 
+(use-package rect
+  :straight nil
+  :after (hydra)
+  :bind (("C-c r" . hydra-rect/body))
+  :config
+  (defhydra hydra-rect ()
+    "rectangle"
+    ("b" backward-char "←")
+    ("n" next-line "↓")
+    ("p" previous-line "↑")
+    ("f" forward-char "→")
+    ("w" copy-rectangle-as-kill "copy")
+    ("y" yank-rectangle "yank")
+    ("t" string-rectangle "string")
+    ("d" kill-rectangle "kill")
+    ("c" clear-rectangle "clear")
+    ("o" open-rectangle "open")
+    ("N" rectangle-number-lines "number lines")
+    ("e" rectangle-exchange-point-and-mark "exchange")
+    ("u" undo "undo")
+    ("r" (if (region-active-p)
+             (deactivate-mark)
+           (rectangle-mark-mode 1))
+     "reset")))
+
 (use-package newcomment
   :ensure nil
   :straight nil

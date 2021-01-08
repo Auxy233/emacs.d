@@ -80,7 +80,7 @@
   (lsp-enable-indentation nil)
   (lsp-enable-links nil)
   (lsp-prefer-capf t)
-  (lsp-keymap-prefix "C-c l")
+  (lsp-keymap-prefix "C-;")
   :init
   (when sevil-use-which-key
     (with-eval-after-load 'lsp-mode
@@ -97,7 +97,8 @@
 
 (use-package dap-mode
   :diminish
-  :after lsp
+  :hook ((dap-stopped . (dap-hydra)))
+  :after (lsp hydra)
   :hook ((python-mode . (lambda () (require 'dap-python)))
          ((c-mode c++-mode objc-mode swift) . (lambda () (require 'dap-lldb)))))
 

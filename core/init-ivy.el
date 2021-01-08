@@ -17,7 +17,11 @@
   (use-package ivy-xref
     :init
     (setq xref-show-definitions-function #'ivy-xref-show-defs)
-    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs)))
+    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
+  
+  (use-package ivy-hydra
+    :commands ivy-hydra-read-action
+    :init (setq ivy-read-action-function #'ivy-hydra-read-action)))
 
 (use-package counsel
   :diminish ivy-mode counsel-mode

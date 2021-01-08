@@ -5,6 +5,7 @@
 ;;; Code:
 
 (use-package org
+  :bind (("C-c o o" . hydra-ox/body))
   :hook ((org-mode text-mode markdown-mode) . auto-fill-mode)
   :custom
   (org-src-fontify-natively t)
@@ -15,6 +16,9 @@
      (lisp . t)
      (python . t)
      (ocaml . t))))
+
+(use-package hydra-ox
+  :straight nil)
 
 ;; pretty symbols
 (use-package org-bullets
