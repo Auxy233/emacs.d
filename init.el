@@ -79,6 +79,7 @@
 (require 'init-treemacs)
 
 ;;; better integration
+(require 'init-hydra)
 (require 'init-eshell)
 (require 'init-shell)
 (require 'init-note)
