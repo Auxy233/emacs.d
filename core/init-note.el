@@ -8,6 +8,9 @@
   :bind (("C-c o o" . hydra-ox/body))
   :hook ((org-mode text-mode markdown-mode) . auto-fill-mode)
   :custom
+  (org-src-preserve-indentation nil)
+  (org-edit-src-content-indentation 0)
+  (org-src-tab-acts-natively t)
   (org-src-fontify-natively t)
   (org-src-tab-acts-natively t)
   (org-confirm-babel-evaluate nil)
@@ -15,6 +18,7 @@
    '((C . t)
      (lisp . t)
      (python . t)
+     (scheme . t)
      (ocaml . t))))
 
 (use-package hydra-ox

@@ -8,6 +8,11 @@
   "My Emacs config setting"
   :group 'convenience)
 
+(defcustom sevil-scheme '(chez)
+  "Scheme default implementation."
+  :type '(symbol list)
+  :group 'sevil-setting)
+
 (defcustom sevil-font-name "Fira Code"
   "My font name."
   :type '(string)
