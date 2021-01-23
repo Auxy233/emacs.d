@@ -25,10 +25,11 @@
   :requires company-pollen)
 
 ;; Scheme
-(use-package geiser
-  :init
-  (defvar geiser-active-implementations)
-  (setq geiser-active-implementations '(chez)))
+;;(use-package geiser
+;;:mode "\\.ss$"
+;;:init
+;;(defvar geiser-active-implementations)
+;;(setq geiser-active-implementations '(chez)))
 
 (provide 'init-racket)
 ;;; init-racket ends here

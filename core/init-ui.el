@@ -13,7 +13,7 @@
   (set-frame-font (sevil/font-info) nil t))
 
 ;; title
-(setq frame-title-format '("Sweet Devil - %b")
+(setq frame-title-format '("|- %b")
       icon-title-format frame-title-format)
 
 ;; inhibit resizing frame
