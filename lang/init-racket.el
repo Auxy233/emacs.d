@@ -5,12 +5,13 @@
 ;;; Code:
 ;; Racket
 (use-package racket-mode
-  :mode "\\.rkt$"
-  :hook ((racket-mode . rainbow-delimiters-mode))
+  :mode "\\.rkt\\'"
+  :hook ((racket-mode . rainbow-delimiters-mode)
+        ;;  (racket-mode . paredit-mode)
+        ;; (racket-mode . racket-repl-mode)
+         (racket-mode . racket-xp-mode))
   :bind (:map racket-mode-map
               ("C-c C-s" . racket-check-syntax-mode)
-              ("[" . paredit-open-round)
-              ("(" . paredit-open-bracket)
               (")" . racket-insert-closing)
               ("]" . racket-insert-closing)
               ("}" . racket-insert-closing)
