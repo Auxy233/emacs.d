@@ -8,7 +8,7 @@
  sevil-scheme '(chez)
  sevil-font-name "Fira Code" ; default font
  sevil-font-size "13" ; font size
- sevil-use-linum t ; show line number in side bar
+ sevil-use-linum nil ; show line number in side bar
  sevil-use-which-key t ; show key hints
  sevil-use-evil nil ; use evil
  sevil-lisp-compiler "sbcl"

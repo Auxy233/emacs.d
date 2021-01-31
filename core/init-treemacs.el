@@ -28,7 +28,6 @@
         treemacs-silent-refresh          t
         treemacs-width                   30
         treemacs-no-png-images t)
-
   (treemacs-follow-mode t)
   (treemacs-filewatch-mode t)
   (pcase (cons (not (null (executable-find "git")))

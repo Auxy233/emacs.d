@@ -136,26 +136,27 @@
    ("o" . easy-kill-er-expand)
    ("i" . easy-kill-er-unexpand))
   :init
-  (setq kill-ring-max 200
-        save-interprogram-paste-before-kill t ; Save clipboard contents before replacement
-        easy-kill-alist '((?w word           " ")
-                          (?s sexp           "\n")
-                          (?l list           "\n")
-                          (?f filename       "\n")
-                          (?d defun          "\n\n")
-                          (?D defun-name     " ")
-                          (?e line           "\n")
-                          (?b buffer-file-name)
-
-                          (?^ backward-line-edge "")
-                          (?$ forward-line-edge "")
-                          (?h buffer "")
-                          (?< buffer-before-point "")
-                          (?> buffer-after-point "")
-                          (?f string-to-char-forward "")
-                          (?F string-up-to-char-forward "")
-                          (?t string-to-char-backward "")
-                          (?T string-up-to-char-backward ""))))
+  (setq
+   kill-ring-max 200
+   save-interprogram-paste-before-kill t ; Save clipboard contents before replacement
+   easy-kill-alist '((?w word           " ")
+                     (?s sexp           "\n")
+                     (?l list           "\n")
+                     (?f filename       "\n")
+                     (?d defun          "\n\n")
+                     (?D defun-name     " ")
+                     (?e line           "\n")
+                     (?b buffer-file-name)
+                     
+                     (?^ backward-line-edge "")
+                     (?$ forward-line-edge "")
+                     (?h buffer "")
+                     (?< buffer-before-point "")
+                     (?> buffer-after-point "")
+                     (?f string-to-char-forward "")
+                     (?F string-up-to-char-forward "")
+                     (?t string-to-char-backward "")
+                     (?T string-up-to-char-backward ""))))
 
 ;; read pdf handy
 ;; only recomment under linux, others are too slow

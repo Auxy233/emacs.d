@@ -75,12 +75,10 @@
 
 ;;; better UI
 (require 'init-ui)
-(require 'init-highlight)
 (require 'init-window)
 (require 'init-treemacs)
 
 ;;; better integration
-(require 'init-eshell)
 (require 'init-shell)
 (require 'init-note)
 (require 'init-dev)
@@ -101,3 +99,4 @@
 (sevil-load-lang erlang)
 (sevil-load-lang cogent)
 ;;; init.el ends here
+(put 'erase-buffer 'disabled nil)

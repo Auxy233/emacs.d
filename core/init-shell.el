@@ -3,83 +3,46 @@
 ;;
 
 ;;; Code:
+
+(use-package eshell)
+
+  ;; display extra information for prompt
+(use-package eshell-prompt-extras
+  :after esh-opt
+  :defines eshell-highlight-prompt
+  :commands (epe-theme-lambda epe-theme-dakrone epe-theme-pipeline)
+  :init (setq eshell-highlight-prompt nil
+                eshell-prompt-function #'epe-theme-lambda))
+
+  ;; fish-like history autosuggestions
+(use-package esh-autosuggest
+  :defines ivy-display-functions-alist
+  :bind (:map eshell-mode-map
+              ([remap eshell-pcomplete] . completion-at-point))
+  :hook ((eshell-mode . esh-autosuggest-mode)
+         (eshell-mode . eshell-setup-ivy-completion))
+  :init (defun eshell-setup-ivy-completion ()
+          "Setup `ivy' completion in `eshell'."
+          (setq-local ivy-display-functions-alist
+                      (remq (assoc 'ivy-completion-in-region
+                                   ivy-display-functions-alist)
+                            ivy-display-functions-alist))))
+
+;; `eldoc' support
+(use-package esh-help
+  :init (setup-esh-help-eldoc))
+
+;; `cd' to frequent directory in `eshell'
+(use-package eshell-z
+  :hook (eshell-mode . (lambda () (require 'eshell-z))))
+
 (use-package shell
   :ensure nil
-  :commands comint-send-string comint-simple-send comint-strip-ctrl-m
-  :hook ((shell-mode . ansi-color-for-comint-mode-on)
-         (shell-mode . n-shell-mode-hook)
-         (comint-output-filter-functions . comint-strip-ctrl-m))
-  :init
-  (setq system-uses-terminfo nil)
-
-  (defun n-shell-simple-send (proc command)
-    "Various PROC COMMANDs pre-processing before sending to shell."
-    (cond
-     ;; Checking for clear command and execute it.
-     ((string-match "^[ \t]*clear[ \t]*$" command)
-      (comint-send-string proc "\n")
-      (erase-buffer))
-     ;; Checking for man command and execute it.
-     ((string-match "^[ \t]*man[ \t]*" command)
-      (comint-send-string proc "\n")
-      (setq command (replace-regexp-in-string "^[ \t]*man[ \t]*" "" command))
-      (setq command (replace-regexp-in-string "[ \t]+$" "" command))
-      ;;(message (format "command %s command" command))
-      (funcall 'man command))
-     ;; Send other commands to the default handler.
-     (t (comint-simple-send proc command))))
-
-  (defun n-shell-mode-hook ()
-    "Shell mode customizations."
-    (local-set-key '[up] 'comint-previous-input)
-    (local-set-key '[down] 'comint-next-input)
-    (local-set-key '[(shift tab)] 'comint-next-matching-input-from-input)
-    (setq comint-input-sender 'n-shell-simple-send)))
-
-;; ANSI & XTERM 256 color support
-(use-package xterm-color
-  :defines (compilation-environment
-            eshell-preoutput-filter-functions
-            eshell-output-filter-functions)
-  :functions (compilation-filter my-advice-compilation-filter)
-  :init
-  ;; For shell
-  (setenv "TERM" "xterm-256color")
-  (setq comint-output-filter-functions
-        (remove 'ansi-color-process-output comint-output-filter-functions))
-  (add-hook 'shell-mode-hook
-            (lambda ()
-              ;; Disable font-locking in this buffer to improve performance
-              (font-lock-mode -1)
-              ;; Prevent font-locking from being re-enabled in this buffer
-              (make-local-variable 'font-lock-function)
-              (setq font-lock-function (lambda (_) nil))
-              (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t)))
-
-  ;; For eshell
-  (with-eval-after-load 'esh-mode
-    (add-hook 'eshell-before-prompt-hook
-              (lambda ()
-                (setq xterm-color-preserve-properties t)))
-    (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
-    (setq eshell-output-filter-functions
-          (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
-
-  ;; For compilation buffers
-  (setq compilation-environment '("TERM=xterm-256color"))
-  (defun my-advice-compilation-filter (f proc string)
-    (funcall f proc
-             (if (eq major-mode 'rg-mode) ; compatible with `rg'
-                 string
-               (xterm-color-filter string))))
-  (advice-add 'compilation-filter :around #'my-advice-compilation-filter)
-  (advice-add 'gud-filter :around #'my-advice-compilation-filter)
-
-  ;; For prolog inferior
-  (with-eval-after-load 'prolog
-    (add-hook 'prolog-inferior-mode-hook
-              (lambda ()
-                (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t)))))
+  :hook (shell-mode . (lambda ()
+                        (term-mode-common-init)
+                        (my/buffer-auto-close)))
+  :bind (:map shell-mode-map
+         ("M-r" . counsel-shell-history)))
 
 ;; Better term
 ;; @see https://github.com/akermu/emacs-libvterm#installation

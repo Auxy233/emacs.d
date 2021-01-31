@@ -70,16 +70,7 @@
   (flycheck-emacs-lisp-load-path 'inherit)
   (flycheck-check-syntax-automatically '(save mode-enabled))
   (flycheck-indication-mode 'right-fringe)
-  (flycheck-temp-prefix ".flycheck")
-  :config
-  ;; display Flycheck errors in GUI tooltips
-  (if (display-graphic-p)
-      (use-package flycheck-pos-tip
-        :defines flycheck-pos-tip-timeout
-        :hook (global-flycheck-mode . flycheck-pos-tip-mode)
-        :config (setq flycheck-pos-tip-timeout 30))
-    (use-package flycheck-popup-tip
-      :hook (flycheck-mode . flycheck-popup-tip-mode))))
+  (flycheck-temp-prefix ".flycheck"))
 
 ;; docker
 (use-package docker :diminish)

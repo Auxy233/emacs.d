@@ -134,6 +134,5 @@
       sentence-end "\\([。！？]\\|……\\|[.?!][]\"')}]*\\($\\|[ \t]\\)\\)[ \t\n]*"
       sentence-end-double-space nil)
 
-
 (provide 'init-boot)
 ;;; init-boot.el ends here

@@ -69,6 +69,11 @@
 (use-package newcomment
   :ensure nil
   :straight nil
+  :bind
+  (("C-c c l" . comment-line)
+   ("C-c c d" . comment-dwim)
+   ("C-c c k" . comment-kill)
+   ("C-c c b" . comment-box))
   :custom
   ;; `auto-fill' inside comments
   (comment-auto-fill-only-comments t))
@@ -166,6 +171,9 @@
   
 ;; Hideshow
 (use-package hideshow
+  :bind (("<C-tab>" . hs-toggle-hiding)
+         ("C-c /"  . hs-hide-all)
+         ("C-c \\" . hs-show-all))
   :ensure nil
   :hook (prog-mode . hs-minor-mode))
 
