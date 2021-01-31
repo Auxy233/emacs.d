@@ -5,12 +5,13 @@
 ;;; Code:
 ;; Racket
 (use-package racket-mode
-  :mode "\\.rkt$"
-  :hook ((racket-mode . rainbow-delimiters-mode))
+  :mode "\\.rkt\\'"
+  :hook ((racket-mode . rainbow-delimiters-mode)
+        ;;  (racket-mode . paredit-mode)
+        ;; (racket-mode . racket-repl-mode)
+         (racket-mode . racket-xp-mode))
   :bind (:map racket-mode-map
               ("C-c C-s" . racket-check-syntax-mode)
-              ("[" . paredit-open-round)
-              ("(" . paredit-open-bracket)
               (")" . racket-insert-closing)
               ("]" . racket-insert-closing)
               ("}" . racket-insert-closing)
@@ -25,10 +26,11 @@
   :requires company-pollen)
 
 ;; Scheme
-(use-package geiser
-  :init
-  (defvar geiser-active-implementations)
-  (setq geiser-active-implementations '(chez)))
+;;(use-package geiser
+;;:mode "\\.ss$"
+;;:init
+;;(defvar geiser-active-implementations)
+;;(setq geiser-active-implementations '(chez)))
 
 (provide 'init-racket)
 ;;; init-racket ends here
