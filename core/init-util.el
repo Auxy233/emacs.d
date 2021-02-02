@@ -185,5 +185,13 @@
    ("b"  . pdf-view-set-slice-from-bounding-box)
    ("r"  . pdf-view-reset-slice)))
 
+;; Tips for next keystroke
+(when sevil-use-which-key
+  (use-package which-key
+    :hook (after-init . which-key-mode)
+    :custom
+    (which-key-idle-delay 0.5)
+    (which-key-add-column-padding 1)))
+
 (provide 'init-util)
 ;;; init-util.el ends here

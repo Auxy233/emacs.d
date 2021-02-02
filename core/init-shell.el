@@ -6,7 +6,7 @@
 
 (use-package eshell)
 
-  ;; display extra information for prompt
+;; display extra information for prompt
 (use-package eshell-prompt-extras
   :after esh-opt
   :defines eshell-highlight-prompt
@@ -14,7 +14,7 @@
   :init (setq eshell-highlight-prompt nil
                 eshell-prompt-function #'epe-theme-lambda))
 
-  ;; fish-like history autosuggestions
+;; fish-like history autosuggestions
 (use-package esh-autosuggest
   :defines ivy-display-functions-alist
   :bind (:map eshell-mode-map
