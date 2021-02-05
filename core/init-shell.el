@@ -62,5 +62,8 @@
               (t '("eshell" "*eshell*" (lambda () (eshell))))
               (t '("terminal" "*terminal*" (lambda () (term shell-pop-term-shell)))))))
 
+(use-package fish-mode
+  :mode "\\.fish$")
+
 (provide 'init-shell)
 ;;; init-shell.el ends here

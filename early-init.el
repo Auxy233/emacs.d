@@ -62,7 +62,7 @@
 ;; add scratch message
 (setq initial-scratch-message
       (concat
-       ";; Make Emacs Even Greater.\n"
+       ";; Arcahv!\n"
        ";; Customize config in `custom.el`.\n\n"))
 
 ;;; early-init ends here

@@ -185,6 +185,18 @@
    ("b"  . pdf-view-set-slice-from-bounding-box)
    ("r"  . pdf-view-reset-slice)))
 
+(use-package tramp
+  :ensure nil
+  :straight nil
+  :custom (tramp-default-method "ssh")
+  :init
+  (let ((backup-dir (expand-file-name
+                     "var/tramp/backup" user-emacs-directory)))
+    (unless (file-exists-p backup-dir)
+      (mkdir backup-dir t))
+    (add-to-list 'backup-directory-alist
+                 (cons tramp-file-name-regexp backup-dir))))
+
 ;; Tips for next keystroke
 (when sevil-use-which-key
   (use-package which-key

@@ -28,6 +28,7 @@
   :bind (("C-c v p" . ivy-push-view)
          ("C-c v o" . ivy-pop-view)
          ("M-*" . ivy-immediate-done)
+         ("C-," . counsel-switch-buffer)
          :map ivy-minibuffer-map
          ("C-w" . ivy-yank-word)
          :map counsel-find-file-map
@@ -153,10 +154,11 @@ This is for use in `ivy-re-builders-alist'."
 (use-package ivy-rich
   :custom
   (ivy-display-style 'fancy)
-  :hook ((ivy-mode . ivy-rich-mode)
-         (ivy-rich-mode . (lambda ()
-                            (setq ivy-virtual-abbreviate
-                                  (or (and ivy-rich-mode 'abbreviate) 'name)))))
+  :hook
+  ((ivy-mode . ivy-rich-mode)
+   (ivy-rich-mode . (lambda ()
+                      (setq ivy-virtual-abbreviate
+                            (or (and ivy-rich-mode 'abbreviate) 'name)))))
   :init
   ;; For better performance
   (setq ivy-rich-parse-remote-buffer nil)
