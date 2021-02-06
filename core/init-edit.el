@@ -189,5 +189,20 @@
 
 ;;(use-package paredit)
 
+(use-package dumb-jump
+  :ensure t
+  :init
+  (add-hook 'xref-backend-functions #'dumb-jump-xref-activate t)
+  :bind (("M-g j" . dumb-jump-go)
+         ("M-g J" . dumb-jump-go-other-window))
+  :custom
+  (dumb-jump-quiet t)
+  (dumb-jump-aggressive t)
+  (dumb-jump-selector 'ivy)
+  (dumb-jump-prefer-searcher 'rg)
+  (dumb-jump-disable-obsolete-warnings t))
+
+(bind-key "C-c o w" 'overwrite-mode)
+
 (provide 'init-edit)
 ;;; init-edit.el ends here

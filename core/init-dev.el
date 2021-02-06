@@ -46,8 +46,9 @@
   :diminish
   :hook (after-init . projectile-mode)
   :bind-keymap ("C-c p" . projectile-command-map)
-  :bind (:map projectile-command-map
-              ("." . projectile-ripgrep))
+  :bind (("C-c s" . projectile-ripgrep)
+         :map projectile-command-map
+         ("." . projectile-ripgrep))
   :config
   (projectile-update-mode-line)         ; Update mode-line at the first time
   :custom
