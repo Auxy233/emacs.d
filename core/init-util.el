@@ -12,11 +12,6 @@
          (ibuffer-mode . (lambda ()
                            (ibuffer-switch-to-saved-filter-groups "Default"))))
   :config
-  (use-package ibuffer-projectile
-    :hook ((ibuffer . (lambda ()
-                        (ibuffer-projectile-set-filter-groups)
-                        (unless (eq ibuffer-sorting-mode 'alphabetic)
-                          (ibuffer-do-sort-by-alphabetic))))))
   :custom
   (ibuffer-expert t)
   (ibuffer-movement-cycle nil)

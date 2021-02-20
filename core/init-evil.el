@@ -31,7 +31,19 @@
      '("7" . meow-digit-argument)
      '("8" . meow-digit-argument)
      '("9" . meow-digit-argument)
-     '("0" . meow-digit-argument))
+     '("0" . meow-digit-argument)
+     ;; don't use ghjk cxmu
+     '("d" . dired)
+     '("k" . kill-buffer)
+     '("w" . ace-window)
+     '("W" . ace-swap-window)
+     '("v" . magit)
+     '("-" . split-window-below)
+     '("\\" . split-window-right)
+     '("p" . project-find-file)
+     '("b" . switch-to-buffer)
+     '("f" . find-file)
+     '("i" . imenu))
     (meow-normal-define-key
      '("0" . meow-expand-0)
      '("9" . meow-expand-9)
@@ -99,32 +111,6 @@
   (meow-setup)
   (meow-setup-line-number)
   (meow-setup-indicator))
-
-;; please be aware of KB conflicts
-(when sevil-use-evil
-  (use-package evil
-    :hook (after-init . evil-mode)
-    :custom
-    (evil-want-keybinding nil)
-    (evil-want-integration t)
-    :config
-
-    (use-package evil-args)
-
-    (use-package evil-matchit)
-
-    (use-package evil-surround
-      :hook (evil-mode . global-evil-surround-mode))
-
-    ;; some modes are not natively supported by evil
-    (use-package evil-collection
-      :hook (evil-mode . evil-collection-init)
-      :custom
-      (evil-collection-company-setup t)
-      (evil-collection-calendar-want-org-bindings nil)
-      (evil-collection-outline-bind-tab-p t)
-      (evil-collection-setup-minibuffer t)
-      (evil-collection-setup-debugger-keys t))))
 
 (provide 'init-evil)
 ;;; init-evil.el ends here

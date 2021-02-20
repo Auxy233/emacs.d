@@ -42,23 +42,10 @@
 (use-package gitignore-mode)
 
 ;; project managemnt
-(use-package projectile
-  :diminish
-  :hook (after-init . projectile-mode)
-  :bind (("C-c p" . projectile-command-map)
-         ("C-c s" . projectile-ripgrep)
-         :map projectile-command-map
-         ("." . projectile-ripgrep))
-  :config
-  (projectile-update-mode-line)         ; Update mode-line at the first time
-  :custom
-  (projectile-git-submodule-command nil)
-  (projectile-completion-system 'ivy)
-  (projectile-sort-order 'recentf)
-  (projectile-mode-line-prefix "")
-  (projectile-use-git-grep t)
-  (projectile-indexing-method 'alien))
-
+(use-package project
+  :init
+  (define-key ctl-x-map "p" project-prefix-map))
+ 
 ;; use ripgrep to power up search speed
 (use-package ripgrep
   :defer t)

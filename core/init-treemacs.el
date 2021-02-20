@@ -36,12 +36,6 @@
     (`(t . _)
      (treemacs-git-mode 'simple)))
 
-  ;; Projectile integration
-  (use-package treemacs-projectile
-    :after projectile
-    :bind (:map projectile-command-map
-                ("h" . treemacs-projectile)))
-
   (use-package treemacs-magit
     :after magit
     :commands treemacs-magit--schedule-update
@@ -49,13 +43,7 @@
             git-commit-post-finish
             magit-post-stage
             magit-post-unstage)
-           . treemacs-magit--schedule-update))
-
-  (use-package treemacs-evil
-    :after treemacs evil
-    :config
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "l") 'treemacs-RET-action)
-    (evil-define-key 'treemacs treemacs-mode-map (kbd "h") 'treemacs-TAB-action)))
-
+           . treemacs-magit--schedule-update)))
+  
 (provide 'init-treemacs)
 ;;; init-treemacs.el ends here

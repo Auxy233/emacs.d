@@ -112,12 +112,6 @@ This is for use in `ivy-re-builders-alist'."
 
     (ivy-prescient-mode 1))
 
-  ;; ivy integration for Projectile
-  (use-package counsel-projectile
-    :init
-    (setq counsel-projectile-grep-initial-input '(ivy-thing-at-point))
-    (counsel-projectile-mode 1))
-
   ;; correcting words with flyspell via Ivy
   (use-package flyspell-correct-ivy
     :after flyspell
