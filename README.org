@@ -10,7 +10,7 @@
      + =dev=: development relating tools
      + =edit=: editing config like jumping and checking
      + =esehll/shell=: shell settings
-     + =evil=: keybinding
+     + =evil=: modal editing with meow
      + =highlight=: highlight content such as paren and lines
      + =ivy=: configuration of fuzzy matching framework Ivy
      + =lsp=: language server and auto-complete settings

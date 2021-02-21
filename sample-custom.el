@@ -15,5 +15,7 @@
  sevil-language-list ; the langauges you want to enable
  '(agda clisp coq cpp haskell idris latex ocaml racket rust erlang))
 
+(setq debug-on-error nil)
+
 (provide 'custom.el)
 ;;; custom.el ends here

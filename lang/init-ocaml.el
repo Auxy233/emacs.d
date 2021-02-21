@@ -13,9 +13,5 @@
   :bind (:map tuareg-mode-map)
   :when (executable-find "utop"))
 
-;; SML
-(use-package sml-mode
-  :mode ("\\.sml$" . sml-mode))
-
 (provide 'init-ocaml)
 ;;; init-ocaml.el ends here

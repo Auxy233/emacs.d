@@ -118,15 +118,6 @@ This is for use in `ivy-re-builders-alist'."
     :bind (:map flyspell-mode-map
                 ([remap flyspell-correct-word-before-point] . flyspell-correct-previous-word-generic)))
 
-  ;; quick launch apps
-  (cond
-   (sys/linux-x-p
-    (bind-key "s-<f6>" #'counsel-linux-app counsel-mode-map))
-   (sys/macp
-    (use-package counsel-osx-app
-      :bind (:map counsel-mode-map
-                  ("s-<f6>" . counsel-osx-app)))))
-
   ;; Display world clock using Ivy
   (use-package counsel-world-clock
     :bind (:map counsel-mode-map

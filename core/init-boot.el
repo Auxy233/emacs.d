@@ -22,12 +22,6 @@
   :config
   (gcmh-mode))
 
-;; display line number
-(when sevil-use-linum
-  (use-package linum
-    :ensure nil
-    :hook ((prog-mode text-mode org-mode) . linum-mode)))
-
 ;; load environment setting
 ;; if you can't use certain executable, please add it to the path
 (when (or sys/mac-x-p sys/linux-x-p)

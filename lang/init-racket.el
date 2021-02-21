@@ -8,7 +8,7 @@
   :mode "\\.rkt\\'"
   :hook ((racket-mode . rainbow-delimiters-mode)
         ;;  (racket-mode . paredit-mode)
-        ;; (racket-mode . racket-repl-mode)
+      ;;   (racket-mode . racket-repl-mode)
          (racket-mode . racket-xp-mode))
   :bind (:map racket-mode-map
               ("C-c C-s" . racket-check-syntax-mode)
@@ -24,13 +24,6 @@
 (use-package pollen-mode
   :mode "\\.\\(p\\|pp\\|pm\\|pmd\\|poly\\|ptree\\)\\'"
   :requires company-pollen)
-
-;; Scheme
-;;(use-package geiser
-;;:mode "\\.ss$"
-;;:init
-;;(defvar geiser-active-implementations)
-;;(setq geiser-active-implementations '(chez)))
 
 (provide 'init-racket)
 ;;; init-racket ends here

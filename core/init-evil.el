@@ -1,8 +1,6 @@
 ;;; init-evil.el --- sweet devil mode
 ;;; Commentary:
-;; use `evil' for editing and manipulate buffers
-;; use `ctrl' to invoke hydra
-;; use `M-' to invke Emacs style KB for editor management
+;; modal editing
 
 ;;; Code:
 (require 'init-const)

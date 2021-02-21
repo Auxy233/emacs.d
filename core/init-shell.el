@@ -44,7 +44,6 @@
   :bind (:map shell-mode-map
          ("M-r" . counsel-shell-history)))
 
-;; Better term
 ;; @see https://github.com/akermu/emacs-libvterm#installation
 (when (and module-file-suffix           ; dynamic module
            (executable-find "cmake")

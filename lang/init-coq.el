@@ -18,10 +18,10 @@
   (coq-project-filename "_CoqProject"))
 
 (use-package company-coq
-  :after proof-general
-  :hook (coq-mode . company-coq-mode)
   :custom
-  (company-coq-features/prettify-symbols-in-terminals t))
+  (company-coq-features/prettify-symbols-in-terminals t)
+  :config
+  (add-hook 'coq-mode-hook #'company-coq-mode))
 
 (provide 'init-coq)
 ;;; init-coq ends here
