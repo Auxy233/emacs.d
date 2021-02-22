@@ -24,13 +24,9 @@
 
 ;; load environment setting
 ;; if you can't use certain executable, please add it to the path
-(when (or sys/mac-x-p sys/linux-x-p)
-  (use-package exec-path-from-shell
-    :init
-    (setq exec-path-from-shell-check-startup-files nil
-          exec-path-from-shell-variables '("PATH" "MANPATH")
-          exec-path-from-shell-arguments '("-l"))
-    (exec-path-from-shell-initialize)))
+(use-package exec-path-from-shell
+  :when (eq system-type 'darwin)
+  :hook (after-init . exec-path-from-shell-initialize))
 
 ;; start server
 ;; (use-package server
@@ -92,6 +88,10 @@
   (what-cursor-show-names t)
   ;; include newline
   (kill-whole-line t))
+
+(use-package no-littering
+  :ensure t
+  :demand t)
 
 (use-package minibuffer
   :ensure nil

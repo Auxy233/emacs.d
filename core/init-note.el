@@ -21,9 +21,6 @@
      (scheme . t)
      (ocaml . t))))
 
-(use-package hydra-ox
-  :straight nil)
-
 ;; pretty symbols
 (use-package org-bullets
   :ensure t

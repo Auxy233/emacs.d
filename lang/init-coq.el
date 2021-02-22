@@ -18,10 +18,9 @@
   (coq-project-filename "_CoqProject"))
 
 (use-package company-coq
+  :hook (coq-mode . company-coq-mode)
   :custom
-  (company-coq-features/prettify-symbols-in-terminals t)
-  :config
-  (add-hook 'coq-mode-hook #'company-coq-mode))
+  (company-coq-features/prettify-symbols-in-terminals nil))
 
 (provide 'init-coq)
 ;;; init-coq ends here

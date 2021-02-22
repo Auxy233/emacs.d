@@ -58,11 +58,11 @@
   (setq ns-pop-up-frames nil))
 
 (use-package hl-line
-  :ensure nil
-  :custom-face (hl-line ((t (:extend t))))
-  :hook
-  ((after-init . global-hl-line-mode)
-   ((term-mode vterm-mode) . hl-line-unload-function)))
+   :ensure nil
+   :custom-face (hl-line ((t (:extend t))))
+   :hook
+   ((after-init . global-hl-line-mode)
+    ((term-mode vterm-mode) . hl-line-unload-function)))
 
 ;; highlight matching parens
 (use-package paren
@@ -89,11 +89,10 @@
           ("HACK" . (face-foreground 'warning)))))
 
 ;; highlight uncommitted changes using VC
+;; issue: diff-hl-flydiff greatly affects performance
 (use-package diff-hl
   :ensure t
-  :hook ((after-init         . (lambda ()
-                                 (global-diff-hl-mode)
-                                 (diff-hl-flydiff-mode)))
+  :hook ((after-init . global-diff-hl-mode)
          (magit-pre-refresh  . diff-hl-magit-pre-refresh)
          (magit-post-refresh . diff-hl-magit-post-refresh)
          (dired-mode         . diff-hl-dired-mode-unless-remote)))
