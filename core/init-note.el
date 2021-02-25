@@ -26,5 +26,9 @@
   :ensure t
   :hook (org-mode . org-bullets-mode))
 
+(use-package literate-calc-mode
+  :ensure t
+  :bind ("C-x x n" . literate-calc-eval-buffer))
+
 (provide 'init-note)
 ;;; init-note.el ends here

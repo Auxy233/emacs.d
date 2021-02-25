@@ -9,9 +9,6 @@
          ("C-c c j" . lsp-ivy-workspace-symbol)
          ("C-c c J" . lsp-ivy-global-workspace-symbol))
   :config
-  ;; integrate yasnippet
-  (use-package ivy-yasnippet
-    :bind (([remap yas-visit-snippet-file] . ivy-yasnippet)))
 
   ;; select from xref candidates with Ivy
   (use-package ivy-xref

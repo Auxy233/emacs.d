@@ -183,7 +183,13 @@
 (use-package tramp
   :ensure nil
   :straight nil
-  :custom (tramp-default-method "ssh")
+  :custom
+  (tramp-default-method "ssh")
+  ;; speed up according to
+  ;; https://www.gnu.org/software/emacs/manual/html_node/tramp/Frequently-Asked-Questions.html
+  (tramp-histfile-override t)
+  (tramp-completion-reread-directory-timeout nil)
+  (tramp-verbose 0)
   :init
   (let ((backup-dir (expand-file-name
                      "var/tramp/backup" user-emacs-directory)))
@@ -198,7 +204,20 @@
     :hook (after-init . which-key-mode)
     :custom
     (which-key-idle-delay 0.5)
-    (which-key-add-column-padding 1)))
+    (which-key-add-column-padding 1)
+    :config
+    (which-key-add-keymap-based-replacements ctl-x-map
+      "a" '("abbrev")
+      "x" '("misc")
+      "p" '("project")
+      "t" '("treemacs")
+      "<tab>" '("indent"))
+    (which-key-add-key-based-replacements
+      "C-c @" "hs"
+      "C-c v" "ivy"
+      "C-c p" "persp"
+      "C-c f" "check"
+      "C-c c" "code")))
 
 (provide 'init-util)
 ;;; init-util.el ends here

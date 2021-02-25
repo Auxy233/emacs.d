@@ -106,10 +106,8 @@
 (use-package ediff
   :ensure nil
   :hook
-  (;; show org ediffs unfolded
-   (ediff-prepare-buffer . outline-show-all)
-   ;; restore window layout when done
-   (ediff-quit . winner-undo))
+  ;; restore window layout when done
+  (ediff-quit . winner-undo)
   :custom
   (ediff-window-setup-function 'ediff-setup-windows-plain)
   (ediff-split-window-function 'split-window-horizontally)
@@ -125,16 +123,20 @@
 (use-package flyspell
   :ensure nil
   :diminish
-  :if (executable-find "aspell")
   :hook (((text-mode outline-mode) . flyspell-mode)
          ;; (prog-mode . flyspell-prog-mode)
          (flyspell-mode . (lambda ()
                             (dolist (key '("C-;" "C-," "C-."))
                               (unbind-key key flyspell-mode-map)))))
-  :init
-  (setq flyspell-issue-message-flag nil
-        ispell-program-name "aspell"
-        ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together")))
+  :custom 
+  (flyspell-issue-message-flag nil)
+  (ispell-program-name "aspell")
+  (ispell-extra-args '("--sug-mode=ultra" "--lang=en_US" "--run-together"))
+  :config
+  (use-package flyspell-correct
+    :bind (:map flyspell-mode-map ("C-;" . flyspell-correct-wrapper)))
+  (use-package flyspell-correct-ivy)
+  (use-package flyspell-correct-popup))
 
 ;; Framework for mode-specific buffer indexes
 (use-package imenu
@@ -144,7 +146,8 @@
 ;; Undo/Redo
 (use-package undo-fu
   :bind (([remap undo] . undo-fu-only-undo)
-         ([remap undo-only] . undo-fu-only-undo)))
+         ([remap undo-only] . undo-fu-only-undo)
+         ("C-+" . undo-fu-only-redo)))
 
 ;; Preview when `goto-char'
 (use-package goto-char-preview
@@ -164,10 +167,13 @@
 (use-package multiple-cursors
   :bind (("C-<" . mc/mark-previous-like-this)
          ("C->" . mc/mark-next-like-this)
-         ("C-c m h" . mc/mark-all-like-this)
-         ("C-c m c" . mc/edit-lines)
-         ("C-c m e" . mc/edit-ends-of-lines)
-         ("C-c m a" . mc/edit-beginnings-of-lines)))
+         ("C-| m" . mc/mark-all-like-this)
+         ("C-| l" . mc/edit-lines)
+         ("C-| SPC" . mc/mark-all-in-region)
+         ("C-| s" . mc/sort-regions)
+         ("C-| r" . mc/reverse-regions)
+         ("C-| e" . mc/edit-ends-of-lines)
+         ("C-| a" . mc/edit-beginnings-of-lines)))
   
 ;; Hideshow
 (use-package hideshow
@@ -181,11 +187,6 @@
 (use-package fancy-narrow
   :diminish
   :hook (after-init . fancy-narrow-mode))
-
-(use-package yasnippet
-  :diminish yas-minor-mode
-  :hook (after-init . yas-global-mode)
-  :config (use-package yasnippet-snippets))
 
 ;;(use-package paredit)
 

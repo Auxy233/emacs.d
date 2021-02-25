@@ -88,10 +88,6 @@
   (string-equal "root" (getenv "USER"))
   "Are you using ROOT user?")
 
-(defconst emacs/>=26p
-  (>= emacs-major-version 26)
-  "Emacs is 26 or above.")
-
 (defconst emacs/>=27p
   (>= emacs-major-version 27)
   "Emacs is 27 or above.")

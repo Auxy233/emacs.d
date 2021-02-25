@@ -58,7 +58,24 @@
   (flycheck-emacs-lisp-load-path 'inherit)
   (flycheck-check-syntax-automatically '(save mode-enabled))
   (flycheck-indication-mode 'right-fringe)
-  (flycheck-temp-prefix ".flycheck"))
+  (flycheck-temp-prefix ".flycheck")
+  (flycheck-keymap-prefix (kbd "C-c f"))
+  :config
+  (use-package flycheck-pos-tip
+    :hook
+    (flycheck-mode . flycheck-pos-tip-mode))
+  (use-package flycheck-color-mode-line
+    :hook
+    (flycheck-mode . flycheck-color-mode-line-mode))
+  (use-package flycheck-rust
+    :hook
+    (rust-mode . flycheck-rust-setup))
+  (use-package flycheck-ocaml
+    :hook
+    (tuareg-mode . flycheck-ocaml-setup))
+  (use-package flycheck-haskell
+    :hook
+    (haskell-mode . flycheck-haskell-set-up)))
 
 ;; docker
 (use-package docker :diminish)

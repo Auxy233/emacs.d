@@ -1,11 +1,9 @@
-;;; init-lsp.el --- The completion engine and language server
+;;; init-prog.el --- The completion engine and language server
 ;;; Commentary:
-;; handy coniguration for different PL, use it as much as possible
+;; programming settings
 
 ;;; Code:
 (require 'init-const)
-
-(use-package popup)
 
 (use-package company
   :diminish
@@ -69,6 +67,16 @@
   :hook (global-company-mode . company-quickhelp-mode)
   :init (setq company-quickhelp-delay 0.5))
 
+(use-package yasnippet
+  :diminish yas-minor-mode
+  :hook (after-init . yas-global-mode)
+  :bind (("C-c y" . yas-visit-snippet-file))
+  :config
+  (use-package yasnippet-snippets)
+  ;; integrate yasnippet
+  (use-package ivy-yasnippet
+    :bind (([remap yas-visit-snippet-file] . ivy-yasnippet))))
+
 (use-package lsp-mode
   :hook
   (lsp-mode . lsp-ui-mode)
@@ -102,5 +110,5 @@
   :hook ((python-mode . (lambda () (require 'dap-python)))
          ((c-mode c++-mode objc-mode swift) . (lambda () (require 'dap-lldb)))))
 
-(provide 'init-lsp)
-;;; init-lsp.el ends here
+(provide 'init-prog)
+;;; init-prog.el ends here

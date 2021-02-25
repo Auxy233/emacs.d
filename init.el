@@ -82,7 +82,7 @@
 (require 'init-shell)
 (require 'init-note)
 (require 'init-dev)
-(require 'init-lsp)
+(require 'init-prog)
 (require 'init-util)
 
 ;;; programming languages environment
