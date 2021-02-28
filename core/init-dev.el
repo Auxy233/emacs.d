@@ -9,14 +9,14 @@
 (use-package compile
   :ensure nil
   :bind (("C-c c c" . compile)
-         ("C-c c C" . recompile))
+         ("C-c c r" . recompile))
   :custom
   (compilation-scroll-output t))
 
 ;; quickrun codes
 (use-package quickrun
   :defer 1
-  :bind (("C-c x" . quickrun))
+  :bind (("C-c c x" . quickrun))
   :custom (quickrun-focus-p nil))
 
 ;; use magit for git VC
@@ -54,6 +54,7 @@
 (use-package flycheck
   :diminish
   :hook (after-init . global-flycheck-mode)
+  :bind (("C-c !" . flycheck-list-errors))
   :custom
   (flycheck-emacs-lisp-load-path 'inherit)
   (flycheck-check-syntax-automatically '(save mode-enabled))

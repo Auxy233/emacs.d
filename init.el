@@ -68,7 +68,6 @@
 
 ;;; better editing
 (require 'init-hydra)
-(require 'init-evil)
 (require 'init-edit)
 (require 'init-ivy)
 (require 'init-persp)
@@ -84,6 +83,7 @@
 (require 'init-dev)
 (require 'init-prog)
 (require 'init-util)
+(require 'init-evil)
 
 ;;; programming languages environment
 (sevil-load-lang cpp)

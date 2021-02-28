@@ -5,7 +5,6 @@
 ;;; Code:
 
 (use-package org
-  :bind (("C-c o o" . hydra-ox/body))
   :hook ((org-mode text-mode markdown-mode) . auto-fill-mode)
   :custom
   (org-src-preserve-indentation nil)

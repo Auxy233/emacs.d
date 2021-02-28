@@ -10,6 +10,10 @@
   :ensure nil
   :hook (after-init . delete-selection-mode))
 
+(use-package align
+  :ensure nil
+  :bind (("C-c a" . align-regexp)))
+
 ;; Automatically reload files was modified by external program
 (use-package autorevert
   :ensure nil
@@ -48,10 +52,10 @@
   :config
   (defhydra hydra-rect ()
     "rectangle"
-    ("b" backward-char "←")
-    ("n" next-line "↓")
-    ("p" previous-line "↑")
-    ("f" forward-char "→")
+    ("h" backward-char "←")
+    ("j" next-line "↓")
+    ("k" previous-line "↑")
+    ("l" forward-char "→")
     ("w" copy-rectangle-as-kill "copy")
     ("y" yank-rectangle "yank")
     ("t" string-rectangle "string")
@@ -119,10 +123,27 @@
   :hook (after-init . electric-pair-mode)
   :init (setq electric-pair-inhibit-predicate 'electric-pair-conservative-inhibit))
 
+(defhydra hydra-spell ()
+  ("h" backward-char "←")
+  ("j" next-line "↓")
+  ("k" previous-line "↑")
+  ("l" forward-char "→")
+  ("V" scroll-up "up")
+  ("v" scroll-down "down")
+  ("a" flyspell-auto-correct-word)
+  ("b" flyspell-buffer "buffer")
+  ("r" flyspell-region "region")
+  ("n" flyspell-correct-next "next")
+  ("p" flyspell-correct-previous "previous")
+  ("." flyspell-correct-at-point "here")
+  ("m" flyspell-correct-move "move"))
+
 ;; On-the-fly spell checker
 (use-package flyspell
   :ensure nil
   :diminish
+  :bind (("C-c s" . hydra-spell/body)
+         ("C-c ." . flyspell-correct-at-point))
   :hook (((text-mode outline-mode) . flyspell-mode)
          ;; (prog-mode . flyspell-prog-mode)
          (flyspell-mode . (lambda ()
@@ -167,13 +188,13 @@
 (use-package multiple-cursors
   :bind (("C-<" . mc/mark-previous-like-this)
          ("C->" . mc/mark-next-like-this)
-         ("C-| m" . mc/mark-all-like-this)
-         ("C-| l" . mc/edit-lines)
-         ("C-| SPC" . mc/mark-all-in-region)
-         ("C-| s" . mc/sort-regions)
-         ("C-| r" . mc/reverse-regions)
-         ("C-| e" . mc/edit-ends-of-lines)
-         ("C-| a" . mc/edit-beginnings-of-lines)))
+         ("C-; m" . mc/mark-all-like-this)
+         ("C-; l" . mc/edit-lines)
+         ("C-; SPC" . mc/mark-all-in-region)
+         ("C-; s" . mc/sort-regions)
+         ("C-; r" . mc/reverse-regions)
+         ("C-; e" . mc/edit-ends-of-lines)
+         ("C-; a" . mc/edit-beginnings-of-lines)))
   
 ;; Hideshow
 (use-package hideshow
