@@ -48,7 +48,7 @@
 (use-package rect
   :straight nil
   :after (hydra)
-  :bind (("C-c r" . hydra-rect/body))
+  :bind (("C-c t" . hydra-rect/body))
   :config
   (defhydra hydra-rect ()
     "rectangle"
@@ -225,6 +225,7 @@
   (dumb-jump-disable-obsolete-warnings t))
 
 (bind-key "C-c o w" 'overwrite-mode)
+(bind-key "C-c r" 'replace-regexp)
 
 (provide 'init-edit)
 ;;; init-edit.el ends here

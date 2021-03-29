@@ -65,7 +65,7 @@
       (lead-k "1") 'delete-other-windows
       (lead-k "<tab>") 'next-buffer
       (lead-k "xr") 'counsel-recentf
-      (lead-k "xx") 'treemacs)
+      (lead-k "xt") 'treemacs)
     
     (use-package evil-args)
 

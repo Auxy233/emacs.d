@@ -79,7 +79,6 @@
     (haskell-mode . flycheck-haskell-set-up)))
 
 ;; docker
-(use-package docker :diminish)
 (use-package dockerfile-mode)
 
 (provide 'init-dev)
