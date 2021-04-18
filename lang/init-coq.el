@@ -15,6 +15,7 @@
   :mode ("\\.v$" . coq-mode)
   :custom
   (proof-splash-enable nil)
+  (proof-three-window-enable t)
   (coq-project-filename "_CoqProject"))
 
 (use-package company-coq

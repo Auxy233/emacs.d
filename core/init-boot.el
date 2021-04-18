@@ -25,7 +25,6 @@
 ;; load environment setting
 ;; if you can't use certain executable, please add it to the path
 (use-package exec-path-from-shell
-  :when (eq system-type 'darwin)
   :hook (after-init . exec-path-from-shell-initialize))
 
 ;; start server
