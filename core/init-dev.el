@@ -76,7 +76,7 @@
     (tuareg-mode . flycheck-ocaml-setup))
   (use-package flycheck-haskell
     :hook
-    (haskell-mode . flycheck-haskell-set-up)))
+    (haskell-mode . flycheck-haskell-setup)))
 
 ;; docker
 (use-package dockerfile-mode)

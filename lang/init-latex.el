@@ -8,10 +8,10 @@
 (use-package auctex
   :defer t
   :hook
-  (LaTeX-mode . visual-line-mode)
-  (LaTeX-mode . flycheck-mode)
-  (LaTeX-mode . LaTeX-math-mode)
-  (LaTeX-mode . company-mode)
+  ((LaTeX-mode . visual-line-mode)
+   (LaTeX-mode . flycheck-mode)
+   (LaTeX-mode . LaTeX-math-mode)
+   (LaTeX-mode . company-mode))
   :custom
   (preview-scale-function (quote preview-scale-from-face))
   (preview-scale-function 3)

@@ -6,8 +6,8 @@
 
 (use-package haskell-mode
   :hook
-  (haskell-mode . haskell-indentation-mode)
-  (haskell-mode . lsp-deferred)
+  ((haskell-mode . haskell-indentation-mode)
+   (haskell-mode . lsp-deferred))
   :init
   (unless (fboundp 'align-rules-list)
     (defvar align-rules-list nil))
