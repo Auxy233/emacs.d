@@ -209,7 +209,7 @@
   :diminish
   :hook (after-init . fancy-narrow-mode))
 
-;;(use-package paredit)
+(use-package paredit)
 
 (use-package dumb-jump
   :ensure t
