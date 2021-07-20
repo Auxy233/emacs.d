@@ -36,7 +36,7 @@
   :bind (("C-:" . avy-goto-char)
          ("C-'" . avy-goto-char-2)
          ("C-c C-j" . avy-resume)
-         ("M-g f" . avy-goto-line)
+         ("M-g l" . avy-goto-line)
          ("M-g w" . avy-goto-word-1)
          ("M-g e" . avy-goto-word-0))
   :hook (after-init . avy-setup-default)
@@ -171,6 +171,8 @@
   :bind (([remap undo] . undo-fu-only-undo)
          ([remap undo-only] . undo-fu-only-undo)
          ("C-+" . undo-fu-only-redo)))
+
+(use-package undo-tree)
 
 ;; Preview when `goto-char'
 (use-package goto-char-preview

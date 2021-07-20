@@ -43,7 +43,7 @@
 
 ;; project managemnt
 (use-package project
-  :init
+  :config
   (define-key ctl-x-map "p" project-prefix-map))
  
 ;; use ripgrep to power up search speed

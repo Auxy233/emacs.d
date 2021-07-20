@@ -10,19 +10,21 @@
          ("C-c c J" . lsp-ivy-global-workspace-symbol))
   :config
 
-  ;; select from xref candidates with Ivy
-  (use-package ivy-xref
-    :init
-    (setq xref-show-definitions-function #'ivy-xref-show-defs)
-    (setq xref-show-xrefs-function #'ivy-xref-show-xrefs))
-  
+  (use-package xref
+    :ensure nil
+    :unless (>= emacs-major-version 28)
+    :custom
+    (xref-show-xrefs-function #'xref-show-definitions-buffer-at-bottom)
+    (xref-show-definitions-function #'xref-show-definitions-buffer-at-bottom))
+
   (use-package ivy-hydra
     :commands ivy-hydra-read-action
     :init (setq ivy-read-action-function #'ivy-hydra-read-action)))
 
 (use-package counsel
   :diminish ivy-mode counsel-mode
-  :bind (("C-c v p" . ivy-push-view)
+  :bind (("C-c i" . ivy-resume)
+         ("C-c v p" . ivy-push-view)
          ("C-c v o" . ivy-pop-view)
          ("M-*" . ivy-immediate-done)
          ("C-," . counsel-switch-buffer)
